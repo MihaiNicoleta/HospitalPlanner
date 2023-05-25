@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="88eab58e-50a3-46a3-8579-92966eec44a9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HELP.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Controllers/AppointmentController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Controllers/AuthenticationController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Controllers/AvailableSlotController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Controllers/DoctorController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Controllers/JwtController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Controllers/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/DemoApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Domain/Appointment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Domain/AvailableSlot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Domain/Doctor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Domain/Schedule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Domain/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Repostiories/AppointmentRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Repostiories/AvailableSlotRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Repostiories/DoctorRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Repostiories/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Services/AppointmentService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Services/AuthenticationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Services/AvailableSlotService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Services/DoctorService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Services/JwtService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/Services/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/configs/ApplicationConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/configs/JwtAuthenticationFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/configs/ResourceNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/configs/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/configs/SwaggerConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/models/AuthenticationRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/models/AuthenticationResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/models/RegisterRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/models/RegisterResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proiect/demo/models/TokenRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/proiect/demo/DemoApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Controllers/AppointmentController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Controllers/AuthenticationController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Controllers/AvailableSlotController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Controllers/DoctorController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Controllers/JwtController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Controllers/UserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/DemoApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Domain/Appointment.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Domain/AvailableSlot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Domain/Doctor$DoctorBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Domain/Doctor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Domain/Schedule$ScheduleBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Domain/Schedule.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Domain/User$UserBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Domain/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Repostiories/AppointmentRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Repostiories/AvailableSlotRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Repostiories/DoctorRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Repostiories/UserRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Services/AppointmentService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Services/AuthenticationService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Services/AvailableSlotService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Services/DoctorService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Services/JwtService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/Services/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/configs/ApplicationConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/configs/JwtAuthenticationFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/configs/ResourceNotFoundException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/configs/SecurityConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/configs/SwaggerConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/models/AuthenticationRequest$AuthenticationRequestBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/models/AuthenticationRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/models/AuthenticationResponse$AuthenticationResponseBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/models/AuthenticationResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/models/RegisterRequest$RegisterRequestBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/models/RegisterRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/models/RegisterResponse$RegisterResponseBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/models/RegisterResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/proiect/demo/models/TokenRequest.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2QHg16vnXwTwrnviLwxkIAeA7pi" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/Mara/Desktop/HospitalPlanner"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="88eab58e-50a3-46a3-8579-92966eec44a9" name="Changes" comment="" />
+      <created>1685015702309</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1685015702309</updated>
+    </task>
+    <servers />
+  </component>
+</project>

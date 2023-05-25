@@ -19,10 +19,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-
-    @PostMapping(value = "/login", consumes = "application/json")
+    @PostMapping(value = "/login", consumes = "application/x-www-form-urlencoded")
     public ResponseEntity<?> login(
-            @RequestBody AuthenticationRequest request
+            @ModelAttribute AuthenticationRequest request
     )
     {
         try {
@@ -35,9 +34,11 @@ public class UserController {
         }
     }
 
+
+
     @PostMapping(value = "/register", consumes = "application/json")
     public ResponseEntity<?> register(
-            @RequestBody RegisterRequest request
+            @ModelAttribute RegisterRequest request
     )
     {
         try {
@@ -53,6 +54,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
     }
+
     @GetMapping
     public ResponseEntity<List<User>> getAllPatients() {
         List<User> patients = userService.getAllPatients();
