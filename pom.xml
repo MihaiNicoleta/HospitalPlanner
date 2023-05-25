@@ -11,7 +11,7 @@
 	<groupId>org.api</groupId>
 	<artifactId>dealshopper</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>dealshopper</name>
+	<name>hospitalplanner</name>
 	<description>Backend</description>
 	<properties>
 		<java.version>17</java.version>
@@ -39,6 +39,11 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>${postgresql.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
 		<dependency>
