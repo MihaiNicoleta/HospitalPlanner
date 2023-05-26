@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Login Form</title>
+</head>
+<body>
+<div>
+
+  <h1>Login </h1>
+
+  <form method="post" action="/api/v1/users/login">
+    <label for="username">username:</label>
+    <input type="username" id="username" name="username" required/>
+    <br/><br/>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required/>
+    <br/><br/>
+    <button type="submit">Login</button>
+    <p th:text="${errorMessage}" th:if="${param.error}"/> <!-- pentru afisarea unui mesaj de eroare in caz de necesitate-->
+  </form>
+
+</div>
+</body>
+</html>

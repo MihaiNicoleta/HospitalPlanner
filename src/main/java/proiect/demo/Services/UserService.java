@@ -6,6 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import proiect.demo.Domain.Doctor;
+import proiect.demo.Domain.LoginForm;
 import proiect.demo.Domain.User;
 import proiect.demo.Repostiories.UserRepository;
 import proiect.demo.configs.ResourceNotFoundException;
@@ -43,6 +44,25 @@ public class UserService {
         var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
 
         // User user = userOptional.orElseThrow(() -> new RuntimeException("User not found"));
+
+        var jwtToken = jwtService.generateToken(user);
+
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .build();
+    }
+    public AuthenticationResponse login(LoginForm loginForm) {
+        String email = loginForm.getUsername();
+        String password = loginForm.getPassword();
+
+        UsernamePasswordAuthenticationToken upaToken = new UsernamePasswordAuthenticationToken(
+                email,
+                password
+        );
+
+        authenticationManager.authenticate(upaToken);
+
+        var user = userRepository.findByEmail(email).orElseThrow();
 
         var jwtToken = jwtService.generateToken(user);
 

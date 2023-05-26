@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+<form action="/api/v1/users/register" method="post">
+    <input type="text" name="username" placeholder="Enter username" required><br>
+    <input type="email" name="email" placeholder="Enter email" required><br>
+    <input type="password" name="password" placeholder="Enter password" required><br>
+    <input type="text" name="firstName" placeholder="Enter first name" required><br>
+    <input type="text" name="lastName" placeholder="Enter last name" required><br>
+    <input type="text" name="phone" placeholder="Enter phone number"><br>
+    <input type="text" name="address" placeholder="Enter address"><br>
+    <input type="submit" value="Register">
+</form>
+</body>
+</html>
