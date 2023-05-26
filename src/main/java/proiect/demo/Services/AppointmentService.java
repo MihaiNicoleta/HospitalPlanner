@@ -26,20 +26,5 @@ public class AppointmentService {
         return appointmentRepository.save(appointment);
     }
 
-    public Appointment updateAppointment(int id, Appointment appointment) {
-        Appointment existingAppointment = appointmentRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Appointment with id=" + id + " not found"));
-        existingAppointment.setDoctor(appointment.getDoctor());
-        existingAppointment.setPatient(appointment.getPatient());
-        existingAppointment.setStartTime(appointment.getStartTime());
-        existingAppointment.setEndTime(appointment.getEndTime());
-        existingAppointment.setDate(appointment.getDate());
-        existingAppointment.setStatus(appointment.getStatus());
-        return appointmentRepository.save(existingAppointment);
-    }
-
-    public void deleteAppointment(int id) {
-        appointmentRepository.deleteById(id);
-    }
 
 }

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Add Appointment</title>
+</head>
+<body>
+<h1>Add Appointment</h1>
+<form method="POST" action="/appointments">
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date"><br><br>
+    <label for="startTime">Start Time:</label>
+    <input type="time" id="startTime" name="startTime"><br><br>
+    <label for="endTime">End Time:</label>
+    <input type="time" id="endTime" name="endTime"><br><br>
+    <label for="department">Department:</label>
+
+    <select id="department" name="department">
+        <option value="">Select a department</option>
+        <!-- Afisam departamentele disponibile -->
+        <option th:each="department : ${availableDepartments}"
+                th:value="${department.id}" th:text="${department.name}">
+        </option>
+    </select><br>
+    <br>
+    <label for="doctor">Doctor:</label>
+    <select id="doctor" name="doctor">
+        <option value="">Select a doctor</option>
+        <!-- Afiseaza doctorii disponibili -->
+        <option th:each="doctor : ${availableDoctors}"
+                th:value="${doctor.id}" th:text="${doctor.name}">
+        </option>
+    </select><br><br>
+    <input type="submit" value="Submit">
+</form>
