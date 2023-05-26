@@ -5,7 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import proiect.demo.Domain.Appointment;
+import proiect.demo.Domain.AvailableSlot;
 import proiect.demo.Services.AppointmentService;
+import proiect.demo.Services.AvailableSlotService;
 
 import java.util.List;
 
@@ -21,29 +23,4 @@ public class AppointmentController {
         List<Appointment> appointments = appointmentService.getAllAppointments();
         return new ResponseEntity<>(appointments, HttpStatus.OK);
     }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Appointment> getAppointmentById(@PathVariable int id) {
-        Appointment appointment = appointmentService.getAppointmentById(id);
-        return new ResponseEntity<>(appointment, HttpStatus.OK);
-    }
-
-    @PostMapping
-    public ResponseEntity<Appointment> addAppointment(@RequestBody Appointment appointment) {
-        Appointment newAppointment = appointmentService.addAppointment(appointment);
-        return new ResponseEntity<>(newAppointment, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/{id}")
-    public ResponseEntity<Appointment> updateAppointment(@PathVariable int id, @RequestBody Appointment appointment) {
-        Appointment updatedAppointment = appointmentService.updateAppointment(id, appointment);
-        return new ResponseEntity<>(updatedAppointment, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAppointment(@PathVariable int id) {
-        appointmentService.deleteAppointment(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
 }
