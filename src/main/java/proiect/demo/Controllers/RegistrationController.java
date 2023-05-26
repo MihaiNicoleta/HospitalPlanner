@@ -7,6 +7,7 @@ import proiect.demo.Domain.User;
 
 
 @Controller
+
 public class RegistrationController {
 
     @GetMapping("/register")
