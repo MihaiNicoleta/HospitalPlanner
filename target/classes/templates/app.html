@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital Planner | Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F2F2F2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #18A4EE;
+            color: #FFFFFF;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            padding: 0;
+            font-size: 36px;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh - 60px);
+        }
+
+        h2 {
+            font-size: 28px;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .appointment-form {
+            background-color: #FFFFFF;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+            width: 400px;
+            max-width: 95%;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #CCCCCC;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border: 1px solid #18A4EE;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-button {
+            background-color: #18A4EE;
+            border: none;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .form-button:hover {
+            background-color: #099
+CC;
+transform: translateY(-2px);
+}    .form-button:active {
+        transform: translateY(2px);
+    }
+
+    @media screen and (max-width: 600px) {
+        h2 {
+            font-size: 24px;
+        }
+
+        .appointment-form {
+            width: 100%;
+        }
+    }
+
+    </style>
+</head>
+<body>
+<div class="header"><h1>Hospital Planner</h1></div>
+<div class="main">
+    <h2>Book an Appointment</h2>
+    <div class="appointment-form">
+        <form>
+            <input type="text" placeholder="Doctor's Name" class="form-control">
+            <input type="text" placeholder="Department" class="form-control">
+            <input type="date" placeholder="Date" class="form-control">
+            <input type="time" placeholder="Time" class="form-control">
+            <div class="button-container">
+                <button type="submit" class="form-button">Book Appointment</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

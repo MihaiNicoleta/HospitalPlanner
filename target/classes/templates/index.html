@@ -2,12 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the Application</title>
+    <style>
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			background-image: url("https://live.staticflickr.com/65535/52937717376_b6f898dd53_z.jpg");
+			background-size: cover;
+			background-position: center center;
+			font-family: Arial, sans-serif;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+		}
+
+		h1 {
+			font-size: 3rem;
+			color: #333333;
+			margin-bottom: 40px;
+			text-align: center;
+			text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+		}
+
+		a {
+			display: inline-block;
+			padding: 10px 20px;
+			border-radius: 5px;
+			font-size: 1.5rem;
+			font-weight: bold;
+			color: white;
+			margin: 10px;
+			text-decoration: none;
+			transition: all ease-in-out 0.3s;
+			box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
+		}
+
+		a:hover {
+			transform: translateY(-5px);
+			background-color: #007bff;
+			box-shadow: none;
+		}
+
+		.registration {
+			background-color: #28a745;
+		}
+
+		.login {
+			background-color: #ffc107;
+		}
+	</style>
 </head>
 <body>
-<h1> Welcome to the application</h1>
-<a href="/register"> Navigate to registration</a>
-<a href="/login"> Navigate to login</a>
-
+<h1>Welcome to the Application</h1>
+<a href="/users/register" class="registration">Navigate to Registration</a>
+<a href="/users/login2" class="login">Navigate to Login</a>
 </body>
 </html>
