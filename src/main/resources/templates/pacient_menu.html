@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Clinic</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <style>
+		body {
+		background-image: url("https://live.staticflickr.com/65535/52937717376_b6f898dd53_z.jpg");
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 1.5;
+			background-color: #f2f2f2;
+			color: #333333;
+			margin: 0;
+			padding: 0;
+		}
+
+		.header {
+  background- colour:blue;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 75px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.header-logo img {
+  height: 50px;
+}
+
+.header-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.header-nav li {
+  margin-right: 25px;
+}
+
+.header-nav a {
+  display: block;
+  text-decoration: none;
+  font-size: 20px;
+  color: #fff;
+  text-transform: uppercase;
+  transition: color 0.3s ease-in-out;
+}
+
+.header-nav a:hover {
+  color: #1b9cfc;
+}
+
+
+
+.logo {
+  font-size: 36px;
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+margin-right: 15px;
+}
+
+
+.main-nav li {
+margin-right: 25px;
+min-width: 4rem; /* adaugam o latime minima de 4rem */
+}
+
+.main-nav a {
+display: block;
+padding: 10px;
+text-decoration: none;
+font-size: 20px;
+color: #333;
+text-transform: uppercase;
+transition: color 0.3s ease-in-out;
+min-width: 4rem; /* adaugam o latime minima de 4rem /
+text-align: center; / centram textul */
+}
+
+.main-nav a:hover {
+color: #1b9cfc;
+}
+
+.menu-icon {
+display: none;
+cursor: pointer;
+}
+
+		.main-image {
+			background-image: url("https://live.staticflickr.com/65535/52937717376_b6f898dd53_z.jpg");
+			background-size: cover;
+			background-position: center center;
+			height: 500px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			text-align: center;
+			padding: 0 20%;
+		}
+
+		.main-image h2 {
+			font-size: 3rem;
+			margin-bottom: 20px;
+		}
+
+		.main-image p {
+			font-size: 1.5rem;
+			line-height: 1.8;
+			margin-bottom: 30px;
+		}
+
+		.main-image a {
+			background-color: #0074C2;
+			color: white;
+			padding: 10px 20px;
+			border-radius: 5px;
+			text-decoration: none;
+			font-weight: bold;
+			transition: all ease-in-out 0.3s;
+		}
+
+		.main-image a:hover {
+			transform: translateY(-5px);
+			background-color: #005EA0;
+			box-shadow: none;
+		}
+
+		.box {
+			background-color: white;
+			padding: 50px;
+			text-align: center;
+			margin: 50px 10%;
+			box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+		}
+
+		.box h3 {
+			font-size: 2rem;
+			margin-bottom: 30px;
+		}
+
+		.box p {
+			font-size: 1.2rem;
+			line-height: 1.8;
+			margin-bottom: 30px;
+		}
+
+		.box a {
+			background-color: #0074C2;
+			color: white;
+			padding: 10px 20px;
+			border-radius: 5px;
+			text-decoration: none;
+			font-weight: bold;
+			transition: all ease-in-out 0.3s;
+		}
+
+		.box a:hover {
+			transform: translateY(-5px);
+			background-color: #005EA0;
+			box-shadow: none;
+		}
+
+		.services {
+			background-color: #0074C2;
+			color: white;
+			padding: 50px 10%;
+			text-align: center;
+			margin: 50px 0;
+		}
+
+		.services h3 {
+			font-size: 2rem;
+			margin-bottom: 30px;
+		}
+
+		.services ul {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: stretch;
+			justify-content: center;
+		}
+
+		.service {
+			background-color: white;
+			color: #333333;
+			padding: 20px;
+			box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+			text-align: center;
+			flex-basis: calc(50% - 20px);
+			margin: 10px;
+			min-height: 250px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.service i {
+			font-size: 3.5rem;
+			margin-bottom: 20px;
+			color: #0074C2;
+		}
+
+		.service h4 {
+			font-size: 1.8rem;
+			margin-bottom: 20px;
+			color: #333333;
+		}
+
+		.service p {
+			font-size: 1.2rem;
+			line-height: 1.8;
+			color: #666666;
+		}
+
+		.symptoms {
+			background-color: white;
+			padding: 50px;
+			text-align: center;
+			margin: 50px 10%;
+			box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+		}
+
+		.symptoms h3 {
+			font-size: 2rem;
+			margin-bottom: 30px;
+			color: #333333;
+		}
+
+		.symptoms form {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.symptoms label {
+			font-size: 1.2rem;
+			margin-right: 10px;
+			color: #333333;
+		}
+
+		.symptoms select {
+			margin-right: 10px;
+			padding: 10px;
+			border-radius: 5px;
+			border: none;
+			width: 250px;
+			font-size: 1.2rem;
+		}
+
+		.symptoms input[type="submit"] {
+			background-color: #0074C2;
+			color: white;
+			padding: 10px 20px;
+			border-radius: 5px;
+			border: none;
+			font-weight: bold;
+			transition: all ease-in-out 0.3s;
+			cursor: pointer;
+		}
+
+		.symptoms input[type="submit"]:hover {
+			transform: translateY(-5px);
+			background-color: #005EA0;
+			box-shadow: none;
+		}
+
+	.contacts {
+		background-color: white;
+		padding: 50px;
+		text-align: center;
+		margin: 50px 10%;
+		box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+	}
+
+	.contacts h3 {
+		font-size: 2rem;
+		margin-bottom: 30px;
+		color: #333333;
+	}
+
+	.contacts form {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.contacts label {
+		font-size: 1.2rem;
+		margin-right: 10px;
+		color: #333333;
+	}
+
+	.contacts input[type="text"],
+	.contacts input[type="email"],
+	.contacts textarea {
+		margin-right: 10px;
+		padding: 10px;
+		border-radius: 5px;
+		border: none;
+		width: 250px;
+		font-size: 1.2rem;
+		margin-bottom: 10px;
+	}
+
+	.contacts textarea {
+		height: 150px;
+	}
+
+	.contacts input[type="submit"] {
+		background-color: #0074C2;
+		color: white;
+		padding: 10px 20px;
+		border-radius: 5px;
+		border: none;
+		font-weight: bold;
+		transition: all ease-in-out 0.3s;
+		cursor: pointer;
+	}
+
+	.contacts input[type="submit"]:hover {
+		transform: translateY(-5px);
+		background-color: #005EA0;
+		box-shadow: none;
+	}
+.main-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+
+	.footer {
+		background-color: #333333;
+		color: white;
+		padding: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		position: relative;
+		bottom: 0;
+		width: 100%;
+		margin-top: auto;
+	}
+
+	.footer p {
+		font-size: 1.2rem;
+		margin: 0;
+	}
+
+	.footer a {
+		color: white;
+		text-decoration: none;
+		font-weight: bold;
+	}
+
+	.social-icons {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.social-icons li {
+		margin: 0 10px;
+		list-style: none;
+	}
+
+	.social-icons a {
+		color: white;
+		font-size: 1.8rem;
+		transition: all ease-in-out 0.3s;
+	}
+
+	.social-icons a:hover {
+		transform: translateY(-2px);
+		color: #0074C2;
+	}
+
+	@media screen and (max-width: 2000px) {
+		.logo {
+			margin-right: 0;
+		}
+
+		.main-nav {
+			display: none;
+		}
+
+		.menu-icon {
+			display: block;
+			font-size: 2rem;
+			margin-left: auto;
+			cursor: pointer;
+		}
+
+		.menu-icon i {
+			color: white;
+			line-height: inherit;
+		}
+
+		.active .menu-icon i {
+			color: #0074C2;
+		}
+
+		.active .main-nav {
+			display: flex;
+			flex-direction: column;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			width: 100%;
+			padding: 20px;
+			background-color: #0074C2;
+			z-index: 1;
+		}
+
+		.active .main-nav li {
+			margin: 10px 0;
+		}
+
+
+		.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+.welcome h2 {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px 0;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px solid #ccc;
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 10px;
+}
+
+.button-services,
+.button-find-doctor,
+.button-check-symptoms,
+.button-make-appointment {
+  margin: 20px;
+  padding: 20px 40px;
+  border: none;
+  border-radius: 50px;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(to bottom right, #1B9CFC, #55E6C1);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 300px;
+  width: 100%;
+}
+
+.button-services span,
+.button-find-doctor span,
+.button-check-symptoms span,
+.button-make-appointment span {
+  display: block;
+  transition: transform 0.5s;
+}
+
+.button-services:hover span {
+  transform: translateY(-200%);
+}
+
+.button-find-doctor:hover span {
+  transform: translateX(-200%);
+}
+
+.button-check-symptoms:hover span {
+  transform: translateX(200%);
+}
+
+.button-make-appointment:hover span {
+  transform: translateY(200%);
+}
+
+@media screen and (max-width: 768px) {
+  .buttons {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .button-services,
+  .button-find-doctor,
+  .button-check-symptoms,
+  .button-make-appointment {
+    margin: 20px 0;
+  }
+}
+
+	}
+
+
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="header-logo">
+        <img src="/path/to/logo.png" alt="Logo" />
+    </div>
+    <nav class="header-nav">
+        <ul>
+            <li><a href="#box">Home</a></li>
+            <li><a href="#box">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contacts">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="welcome">
+    <h2>Welcome!</h2>
+    <div class="buttons">
+        <button class="button-services">Services</button>
+        <button class="button-find-doctor">Find a Doctor</button>
+        <button class="button-check-symptoms">Check Symptoms</button>
+        <button class="button-make-appointment">Make an Appointment</button>
+    </div>
+</div>
+
+<section class="box">
+    <h3>About Us</h3>
+    <p>My Clinic was founded in 1998 with the aim of providing the best medical care to its patients. With over 20 years
+        of experience in the field, we have the expertise and technology to provide state-of-the-art medical care.</p>
+    <a href="#" class="btn-cta">Learn More</a>
+</section>
+
+<section class="services" id="services">
+    <h3>Our Services</h3>
+    <ul>
+        <li>
+            <div class="service">
+                <i class="fas fa-stethoscope"></i>
+                <h4>General Medicine</h4>
+                <p>We provide comprehensive medical care for all ages, from infants to seniors.</p>
+            </div>
+        </li>
+        <li>
+            <div class="service">
+                <i class="fas fa-heartbeat"></i>
+                <h4>Cardiology</h4>
+                <p>Our cardiology department is equipped with the latest technology to provide the best care for heart
+                    diseases.</p>
+            </div>
+        </li>
+        <li>
+            <div class="service">
+                <i class="fas fa-syringe"></i>
+                <h4>Immunology</h4>
+                <p>We provide immunization services for a wide range of diseases to protect our patients.</p>
+            </div>
+        </li>
+        <li>
+            <div class="service">
+                <i class="fas fa-tooth"></i>
+                <h4>Dentistry</h4>
+                <p>Our dental department provides comprehensive dental care for all ages.</p>
+            </div>
+        </li>
+    </ul>
+</section>
+
+<section class="symptoms" id="symptoms">
+    <h3>Symptoms Checker</h3>
+    <form action="#" method="GET">
+        <label for="symptom">Select a symptom:</label>
+        <select name="symptom" id="symptom">
+            <option value="">Select a symptom</option>
+            <option value="cough">Cough</option>
+            <option value="fever">Fever</option>
+            <option value="headache">Headache</option>
+            <option value="nausea">Nausea</option>
+            <option value="rash">Rash</option>
+            <option value="sore throat">Sore throat</option>
+        </select>
+        <input type="submit" value="Find a Doctor">
+    </form>
+</section>
+
+<section class="contacts" id="contacts">
+    <h3>Contact Us</h3>
+    <form action="#" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name..." required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email..." required>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" placeholder="Enter your message..." required></textarea>
+        <input type="submit" value="Submit"/>
+    </form>
+</section>
+
+<footer class="footer">
+    <p>© 2021 My Clinic. All rights reserved.</p>
+    <ul class="social-icons">
+        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+    </ul>
+</footer>
+
+<script src="https://kit.fontawesome.com/3f79b074a1.js" crossorigin="anonymous"></script>
+<script>
+  const menuIcon = document.querySelector(".menu-icon");
+  const mainNav = document.querySelector(".main-nav");
+
+  menuIcon.addEventListener("click", () => {
+	mainNav.classList.toggle("active");
+	menuIcon.childNodes[0].classList.toggle("fa-bars");
+	menuIcon.childNodes[0].classList.toggle("fa-times");
+  });
+
+
+</script>
