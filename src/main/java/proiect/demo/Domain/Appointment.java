@@ -14,14 +14,13 @@ public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
 
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", nullable = false)
     private User patient;
 
@@ -37,12 +36,4 @@ public class Appointment {
     @Column(nullable = false)
     private String status;
 
-    public Appointment(Doctor doctor, User patient, Timestamp startTime, Timestamp endTime, Date date, String status) {
-        this.doctor = doctor;
-        this.patient = patient;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.date = date;
-        this.status = status;
-    }
 }

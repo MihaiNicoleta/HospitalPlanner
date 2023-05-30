@@ -6,11 +6,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
-@Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 @Table(name = "availableslots")
 public class AvailableSlot {
 
@@ -31,10 +29,4 @@ public class AvailableSlot {
     @Column(name = "end_time", nullable = false)
     private Timestamp endTime;
 
-    public AvailableSlot(Doctor doctor, Date day, Timestamp startTime, Timestamp endTime) {
-        this.doctor = doctor;
-        this.day = day;
-        this.startTime = startTime;
-        this.endTime = endTime;
-    }
 }
