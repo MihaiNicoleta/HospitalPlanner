@@ -38,8 +38,9 @@ public class UserService {
                 request.getEmail(),
                 request.getPassword()
         );
-
-        authenticationManager.authenticate(upaToken);
+        System.out.println(request.getEmail() + " " +
+                request.getPassword());
+      //  authenticationManager.authenticate(upaToken);
 
         var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
 
@@ -51,6 +52,7 @@ public class UserService {
                 .token(jwtToken)
                 .build();
     }
+
     public AuthenticationResponse login(LoginForm loginForm) {
         String email = loginForm.getUsername();
         String password = loginForm.getPassword();
@@ -95,8 +97,7 @@ public class UserService {
                 .email(request.getEmail())
                 .password(request.getPassword())
                 .build()
-        )
-                .getToken();
+        ).getToken();
 
         return RegisterResponse.builder()
                 .token(jwtToken)

@@ -1,22 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login Form</title>
+    <title>Our Hospital - Login Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+         .logo { display: inline-block; height: 50px; width: 50px; background-image: url("https://live.staticflickr.com/65535/52937582366_47e668da36_n.jpg"); background-size: contain; background-repeat: no-repeat; margin-right: 10px; }
+
+    </style>
 </head>
 <body>
-<h1>Login Form</h1>
-<form method="post" action="/users/login2">
-    <label for="username">Username:</label>
-    <input type="text" name="username" id="username" placeholder="Enter your username"><br>
-
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password" placeholder="Enter your password"><br>
-
-    <button type="submit">Login</button>
-
-    <!-- Display error message if authentication fails -->
-    <div th:if="${error}" style="color: red">Invalid username or password</div>
-</form>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container"><a class="navbar-brand" href="#">
+        <div class="logo"></div>
+        Our Hospital </a></div>
+</nav>
+<main class="container my-5"><h1>Login Form</h1>
+    <form method="post" action="/users/login2" class="my-4">
+        <div class="form-group"><label for="email">Email:</label> <input type="email" name="email" id="email"
+                                                                         class="form-control"
+                                                                         placeholder="Enter your email" required></div>
+        <div class="form-group"><label for="password">Password:</label> <input type="password" name="password"
+                                                                               id="password" class="form-control"
+                                                                               placeholder="Enter your password"
+                                                                               required></div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <div th:if="${error}" class="my-3"><p class="text-danger">Invalid email or password.</p></div>
+    </form>
+</main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha384-/Y6p12Ej6IyZFJoft+OJAvSYsBePQJx1h0t20jTxhzk=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QFoEV9ahkPWuPh3MttT2W+CkRpG/WNE8d6BpKV99+CF0ew+QrxUo"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 </html>
