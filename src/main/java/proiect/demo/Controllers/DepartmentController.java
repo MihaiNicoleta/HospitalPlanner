@@ -21,12 +21,16 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
+    @GetMapping
+    public ResponseEntity<List<Department>> getAllDepartments() {
+        List<Department> departments = departmentService.getAllDepartments();
+        return new ResponseEntity<>(departments, HttpStatus.OK);
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Department>> getDepartmentById(@PathVariable int id) {
         Optional<Department> department = departmentService.getDepartmentById(id);
-        System.out.println("AICI3");
-
         return new ResponseEntity<>(department, HttpStatus.OK);
     }
 }
