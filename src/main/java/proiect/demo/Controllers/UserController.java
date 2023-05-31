@@ -8,10 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import proiect.demo.Domain.User;
 import proiect.demo.Domain.UserDto;
@@ -110,5 +107,39 @@ public class UserController {
         }
     }
 
+    @GetMapping("pacient_menu/find_doctor")
+    public String find_doctor() {
+        return "find_doctor";
+    }
+
+    @GetMapping("pacient_menu/find_doctor/result")
+    public String getDoctorsByDepartment(@RequestParam("department") String departmentSlug, Model model) {
+        // obțineți id-ul departamentului din slug
+        Integer departmentId = null;
+        switch (departmentSlug) {
+            case "cardiology":
+                departmentId = 10;
+                break;
+            case "dermatology":
+                departmentId = 11;
+                break;
+            case "endocrinology":
+                departmentId = 12;
+                break;
+            case "gastroenterology":
+                departmentId = 13;
+                break;
+        }
+
+        // verificați dacă s-a reușit obținerea id-ului departamentului
+        if (departmentId != null) {
+            // redirecționați utilizatorul către pagina cu doctorii pentru acel departament
+            return "redirect:/doctors/department/" + departmentId;
+        } else {
+            // afișați o eroare
+            model.addAttribute("error", "Cannot find doctors for selected department!");
+            return "find_doctor";
+        }
+    }
 
 }

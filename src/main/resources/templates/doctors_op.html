@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctors by Department</title>
+    <style>
+        body {
+            background-image: url('https://live.staticflickr.com/65535/52941321373_f0acf4ae50_z.jpg');
+            background-repeat: no-repeat;
+            background-size:  cover;
+            background-size: 100% auto;
+    background-attachment: fixed;
+    background-position: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+            margin: 10px;
+            padding: 20px;
+            width: 75%;
+            max-width: 500px;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card-container:hover {
+            transform: translateY(-10px);
+        }
+
+        .doctor-detail {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .doctor-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .doctor-email {
+            font-size: 18px;
+            font-style: italic;
+        }
+
+        .doctor-cabinet-number {
+            font-size: 18px;
+        }
+
+        .no-doctors {
+            font-style: italic;
+            color: white;
+            text-shadow: 1px 1px 2px #000000;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Doctors by Department <span th:text="${departmentName}"></span></h1>
+
+    <div th:if="${not #lists.isEmpty(doctorList)}">
+        <div th:each="doctor : ${doctorList}" class="card-container">
+            <div class="doctor-detail">
+                <div class="doctor-name">Name: <span th:text="${doctor.name}"></span></div>
+                <div class="doctor-email">Email: <span th:text="${doctor.email}"></span></div>
+                <div class="doctor-cabinet-number">Cabinet Number: <span th:text="${doctor.cabinetNumber}"></span></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h2 style="color:white">Number of doctors: <span th:text="${doctorList.size()}"></span></h2>
+    </div>
+    <div th:if="${#lists.isEmpty(doctorList)}">
+        <p>No doctors found for this department.</p>
+    </div>
+</div>
+</body>
+</html>
