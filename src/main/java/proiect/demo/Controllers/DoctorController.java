@@ -3,6 +3,7 @@ package proiect.demo.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import proiect.demo.Domain.Doctor;
 import proiect.demo.Services.DoctorService;
@@ -27,6 +28,11 @@ public class DoctorController {
         List<Doctor> doctors = doctorService.getAllDoctors();
         return new ResponseEntity<>(doctors, HttpStatus.OK);
     }
-
+    @GetMapping("/afisareDoctori")
+    public String showDoctors(Model model) {
+        List<Doctor> doctors = doctorService.getAllDoctors();
+        model.addAttribute("doctors", doctors);
+        return "afisare_doctori";
+    }
 
 }

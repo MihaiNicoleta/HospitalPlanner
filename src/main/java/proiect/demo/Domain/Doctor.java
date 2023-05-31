@@ -24,9 +24,6 @@ public class Doctor {
     @Column
     private String name;
 
-    @Column
-    private String specialty;
-
     @Column(unique = true, nullable = false)
     private String email;
 
@@ -35,5 +32,8 @@ public class Doctor {
 
     @Column(name = "cabinet_number")
     private int cabinetNumber;
+
+    @Column(name = "department_id")
+    private Integer departmentId;
 
 }

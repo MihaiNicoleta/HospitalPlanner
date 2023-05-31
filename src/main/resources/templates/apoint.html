@@ -1,112 +1,159 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
-    <title>Programare examinare dentară</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Add Appointment</title>
     <style>
-.container {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 50px 0;
-}
+        body {
+            background-image: url("https://live.staticflickr.com/65535/52939897827_f16c54ba56_z.jpg");
+            background-size: cover;
+            background-position: center center;
+            font-family: Arial, sans-serif;
+        }
 
-h1 {
-  margin-bottom: 50px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 700;
-  font-size: 36px;
-  text-align: center;
-}
+        h1 {
+            color: #fff;
+            text-align: center;
+            padding-top: 50px;
+            font-size: 50px;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
 
-form {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+        }
 
-.form-group {
-  margin-bottom: 20px;
-}
+        label {
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #3c3c3c;
+        }
 
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  color: #333;
-}
+        input[type="date
+"],
+input[type="time"],
+select {
+border: none;
+font-size: 18px;
+padding: 10px;
+margin-bottom: 20px;
+border-radius: 5px;
+box-shadow: inset 0px 0px 5px rgba(0,0,0,0.2);
+}    input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
-input {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  color: #555;
-  border: none;
-  border-radius: 5px;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-}
+    input[type="submit"]:hover {
+        background-color: #0063cc;
+    }
 
-button {
-  background-color: #007bff;
-  padding: 10px 20px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+    select {
+        width: 100%;
+    }
 
-button:hover {
-  background-color: #0063cc;
-}
+    .form-container {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        padding: 50px;
+        margin: 0 auto;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+        margin-top: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        max-width: 500px;
+    }
+
+    .form-container h2 {
+        font-size: 30px;
+        margin-bottom: 30px;
+        color: #007bff;
+          text-align: center;
+
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .transparent-background {
+        background-color: rgba(0, 0, 0, 0.4);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+        .form-container {
+            padding: 30px;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .form-container {
+            padding: 20px;
+            margin-top: 50px;
+        }
+    }
+
+
+
 
     </style>
 </head>
-<body><!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Programare examinare dentară</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
-<div class="container">
-    <h1>Programare</h1>
-    <form method="POST" action="/appointments">
-        <div class="form-group">
-            <label for="name">Nume:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
+<body><h1>Make an Appointment</h1>
+<div class="transparent-background">
+    <div class="form-container"><h1>Choose the convenient day and time</h1>
+        <form method="POST" action="/appointments"><label for="date">Data:</label> <input type="date" id="date"
+                                                                                          name="date"> <label
+                for="startTime">Ora de început:</label>
+            <input type="time" id="startTime" name="startTime">
 
-        <div class="form-group">
-            <label for="email">Adresă de email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="phone">Număr de telefon:</label>
-            <input type="tel" id="phone" name="phone" required>
-        </div>
-        <div class="form-group">
-            <label for="date">Data preferată:</label>
-            <input type="date" id="date" name="date" required>
-        </div>
-        <div class="form-group">
-            <label for="time">Ora preferată:</label>
-            <input type="time" id="time" name="time" required>
-        </div>
-        <button type="submit">Trimiteți programarea</button>
-    </form>
+            <label for="endTime">Ora de sfârșit:</label>
+            <input type="time" id="endTime" name="endTime">
+
+            <label for="department">Departament:</label>
+            <select id="department" name="department">
+                <option value="">Selectați un departament</option>
+                <!-- Afisam departamentele disponibile -->
+                <option th:each="department : ${availableDepartments}"
+                        th:value="${department.id}" th:text="${department.name}">
+                </option>
+            </select>
+
+            <label for="doctor">Doctor:</label>
+            <select id="doctor" name="doctor">
+                <option value="">Selectați un doctor</option>
+                <!-- Afiseaza doctorii disponibili -->
+                <option th:each="doctor : ${availableDoctors}"
+                        th:value="${doctor.id}" th:text="${doctor.name}">
+                </option>
+            </select>
+            <input type="submit" value="Trimiteți programarea">
+        </form>
+    </div>
 </div>
 </body>
 </html>
