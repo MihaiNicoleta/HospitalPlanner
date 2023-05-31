@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Find a Doctor</title>
+  <style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: "Lato", sans-serif;
+		}
+		body {
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 1.5;
+			background-image: url('https://live.staticflickr.com/65535/52938611950_9f31674b31_b.jpg');
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			height: 600px;
+
+		}
+		header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			background-color: #00337f;
+			color: #fff;
+			padding: 20px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+		}
+		.logo img {
+			width: 100px;
+			height: auto;
+		}
+		nav ul {
+			list-style: none;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+		nav ul li {
+			margin-right: 20px;
+		}
+		nav ul li a {
+			color: #fff;
+			text-decoration: none;
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+		nav ul li a:hover {
+			color: #ccc;
+		}
+		.find-a-doctor {
+			padding: 50px;
+			background-color: rgba(255, 255, 255, 0.8);
+			margin: auto;
+			margin-top: 50px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			border-radius: 5px;
+			max-width: 700px;
+		}
+		.find-a-doctor h1 {
+			font-size: 32px;
+			margin-bottom: 20px;
+			text-align: center;
+		}
+		.find-a-doctor form {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+		}
+		.find-a-doctor label {
+			margin-right: 10px;
+			font-weight: bold;
+		}
+		.find-a-doctor input[type="submit"] {
+			background-color: #00337f;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 16px;
+			margin-left: 10px;
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+		.find-a-doctor input[type="submit"]:hover {
+			background-color: #ccc;
+			color: #00337f;
+			transition: all 0.2s ease-in-out;
+		}
+		.footer {
+            display: flex;
+			align-items: center;
+			justify-content: space-between;
+			background-color: #00337f;
+			color: #fff;
+			padding: 20px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			position: absolute;
+             bottom: 0;
+             left: 0;
+             right: 0;
+             height: 100px;
+     }
+
+		.footer .content p {
+			margin-bottom: 5px;
+			text-align: left;
+		}
+		.footer .links ul {
+			list-style: none;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+		.footer .links ul li {
+			margin-right: 20px;
+		}
+		.footer .links ul li a {
+			color: #fff;
+			text-decoration: none;
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+		.footer .links ul li a:hover {
+			color: #ccc;
+		}
+.top-specialties {
+    background-color: #f6f6f6;
+    padding: 50px;
+    margin-top: 150px;
+    max-width: 1300px;
+}
+
+.top-specialties h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+}
+.card {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+}
+.card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.card h3 {
+    font-size: 24px;
+    margin: 20px;
+}
+.card p {
+    margin: 20px;
+}
+.card a {
+    display: inline-block;
+    background-color: #00337f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 20px;
+}
+.card a:hover {
+    background-color: #ccc;
+    color: #00337f;
+    transition: all 0.2s ease-in-out;
+}
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <img src="https://live.staticflickr.com/65535/52938325014_23e12349b1.jpg" alt="NYC Health + Hospitals">
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Find a Doctor</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul>
+  </nav>
+</header>
+<section class="find-a-doctor">
+  <h1>Find a Doctor</h1>
+  <form>
+    <label for="doctor">Name of Doctor:</label>
+    <input type="text" id="doctor" name="doctor">
+    <label type="text">Departament:</label>
+    <input type="text" id="location" name="location">
+    <input type="submit" value="Find">
+  </form>
+</section>
+<section class="top-specialties">
+  <h2>Top Specialties</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="https://live.staticflickr.com/65535/52938306761_775d75a708_w.jpg" alt="Card Image">
+      <h3>Cardiology</h3>
+      <p>Trust our experienced cardiologists to help you manage your heart health. We offer comprehensive
+        treatments and services for heart disease and conditions. </p>
+      <a href="#">Learn More</a>
+    </div>
+    <div class="card">
+      <img src="https://live.staticflickr.com/65535/52937708397_9d93e01a36_w.jpg" alt="Card Image">
+      <h3>Dermatology</h3>
+      <p> Our dermatologists provide expert care and treatment for a wide range of skin conditions. From acne to
+        cancer, we've got you covered.</p>
+      <a href="#">Learn More</a>
+    </div>
+    <div class="card">
+      <img src="https://live.staticflickr.com/65535/52937708407_d4e916e101_w.jpg" alt="Card Image">
+      <h3>Endocrinology</h3>
+      <p>Our endocrinology department specializes in treating hormonal imbalances and disorders. We work closely
+        with our patients to develop personalized treatment plans that fit their unique needs. </p>
+      <a href="#">Learn More</a>
+    </div>
+    <div class="card">
+      <img src="https://live.staticflickr.com/65535/52938698505_934306c155_n.jpg" alt="Card Image">
+      <h3>Gastroenterology</h3>
+      <p>Our gastroenterologists are experts in the diagnosis and treatment of digestive disorders. From acid
+        reflux to colon cancer, we provide the care you need to feel your best. </p>
+      <a href="#">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="content">
+    <p>NYC Health + Hospitals</p>
+    <p>Contact: 1-800-555-5555</p>
+  </div>
+  <div class="links">
+    <ul>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Terms &amp; Conditions</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>
