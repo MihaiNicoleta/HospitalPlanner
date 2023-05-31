@@ -1,10 +1,25 @@
 package proiect.demo.Services;
+
+import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import proiect.demo.Domain.Appointment;
+import proiect.demo.Domain.AvailableSlot;
+import proiect.demo.Domain.User;
 import proiect.demo.Repostiories.AppointmentRepository;
+import proiect.demo.Repostiories.AvailableSlotRepository;
 import proiect.demo.configs.ResourceNotFoundException;
 
+
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -16,6 +31,30 @@ public class AppointmentService {
     public List<Appointment> getAllAppointments() {
         return appointmentRepository.findAll();
     }
+
+    private AvailableSlotRepository availableSlotsRepository;
+
+    @Autowired
+    private AppointmentRepository appointmentsRepository;
+    private AppointmentService appointmentService;
+    private UserService userService;
+
+
+    public void checkSlotAvailability(int doctorId, Timestamp startDateTime, Timestamp endDateTime) {
+        List<Appointment> overlappingAppointments = appointmentRepository.findByDoctorIdAndDateTime(doctorId, startDateTime, endDateTime);
+
+        if (!overlappingAppointments.isEmpty()) {
+            throw new RuntimeException("Intervalul dvs. se suprapune cu o altă programare existențială.");
+        }
+    }
+
+
+    @Transactional
+    public void save(Appointment appointment) {
+
+        appointmentRepository.save(appointment);
+    }
+
 
     public Appointment getAppointmentById(int id) {
         return appointmentRepository.findById(id)

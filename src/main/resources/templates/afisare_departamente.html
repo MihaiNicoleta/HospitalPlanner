@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Departamente</title>
+</head>
+<body>
+<h1>Lista departamentelor:</h1>
+<form method="GET" action="/departments/ok">
+    <label for="department">Departament:</label>
+    <select id="department" name="department">
+        <option value="">Selectați un departament</option>
+        <!-- iterate through the list of departments and create an option for each one -->
+        <option th:each="department : ${departmentList}"
+                th:value="${department.id}"
+                th:text="${department.name}">
+        </option>
+    </select>
+</form>
+</body>
+</html>

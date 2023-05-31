@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import proiect.demo.Domain.Department;
 import proiect.demo.Domain.User;
 import proiect.demo.Domain.UserDto;
+import proiect.demo.Services.DepartmentService;
+import proiect.demo.Services.DoctorService;
 import proiect.demo.Services.JwtService;
 import proiect.demo.Services.UserService;
 import proiect.demo.configs.ApplicationConfig;
@@ -23,6 +26,8 @@ import proiect.demo.models.AuthenticationResponse;
 import proiect.demo.models.RegisterRequest;
 import proiect.demo.models.RegisterResponse;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -30,6 +35,7 @@ public class UserController {
 
     private final UserService userService;
     private final JwtService jwtService;
+    private final DepartmentService departmentService;
     private final ApplicationConfig applicationConfig;
 
     @GetMapping("/login2")
@@ -41,6 +47,17 @@ public class UserController {
     public String app() {
         return "app";
     }
+
+    @GetMapping("/pacient_menu")
+    public String pacient_menu() {
+        return "pacient_menu";
+    }
+
+    @GetMapping("pacient_menu/find_doctor")
+    public String find_doctor() {
+        return "find_doctor";
+    }
+
 
     @GetMapping("/index")
     public String home() {
@@ -73,6 +90,12 @@ public class UserController {
         }
     }
 
+    @GetMapping("/pacient_menu/appointment")
+    public String showDepartments(Model model) {
+        List<Department> departments = departmentService.getAllDepartments();
+        model.addAttribute("departmentList", departments);
+        return "appointment";
+    }
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {

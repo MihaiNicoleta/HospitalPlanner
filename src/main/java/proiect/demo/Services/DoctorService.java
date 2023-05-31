@@ -24,4 +24,7 @@ public class DoctorService {
     }
 
 
+    public List<Doctor> getDoctorsByDepartment(Integer departmentId) {
+        return doctorRepository.findByDepartmentId(departmentId);
+    }
 }

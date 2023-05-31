@@ -2,33 +2,165 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Add Appointment</title>
-</head>
-<body>
-<h1>Add Appointment</h1>
-<form method="POST" action="/appointments">
-    <label for="date">Date:</label>
-    <input type="date" id="date" name="date"><br><br>
-    <label for="startTime">Start Time:</label>
-    <input type="time" id="startTime" name="startTime"><br><br>
-    <label for="endTime">End Time:</label>
-    <input type="time" id="endTime" name="endTime"><br><br>
-    <label for="department">Department:</label>
+    <style>
+        body {
+            background-image: url("https://live.staticflickr.com/65535/52939897827_f16c54ba56_z.jpg");
+            background-size: cover;
+            background-position: center center;
+            font-family: Arial, sans-serif;
+        }
 
-    <select id="department" name="department">
-        <option value="">Select a department</option>
-        <!-- Afisam departamentele disponibile -->
-        <option th:each="department : ${availableDepartments}"
-                th:value="${department.id}" th:text="${department.name}">
-        </option>
-    </select><br>
-    <br>
-    <label for="doctor">Doctor:</label>
-    <select id="doctor" name="doctor">
-        <option value="">Select a doctor</option>
-        <!-- Afiseaza doctorii disponibili -->
-        <option th:each="doctor : ${availableDoctors}"
-                th:value="${doctor.id}" th:text="${doctor.name}">
-        </option>
-    </select><br><br>
-    <input type="submit" value="Submit">
-</form>
+        h1 {
+            color: #fff;
+            text-align: center;
+            padding-top: 50px;
+            font-size: 50px;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #3c3c3c;
+        }
+
+        input[type="date
+"],
+input[type="time"],
+select {
+border: none;
+font-size: 18px;
+padding: 10px;
+margin-bottom: 20px;
+border-radius: 5px;
+box-shadow: inset 0px 0px 5px rgba(0,0,0,0.2);
+}    input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0063cc;
+    }
+
+    select {
+        width: 100%;
+    }
+
+    .form-container {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        padding: 50px;
+        margin: 0 auto;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+        margin-top: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        max-width: 500px;
+    }
+
+    .form-container h2 {
+        font-size: 30px;
+        margin-bottom: 30px;
+        color: #007bff;
+          text-align: center;
+
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .transparent-background {
+        background-color: rgba(0, 0, 0, 0.4);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+        .form-container {
+            padding: 30px;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .form-container {
+            padding: 20px;
+            margin-top: 50px;
+        }
+    }
+
+
+
+
+
+
+    </style>
+</head>
+<body><h1>Make an Appointment</h1>
+<div class="transparent-background">
+    <div class="form-container"><h1>Choose the convenient day and time</h1>
+        <label for="date">Data:</label> <input type="date" id="date"
+                                               name="date"> <label
+                for="startTime">Ora de început:</label>
+        <input type="time" id="startTime" name="startTime">
+
+        <label for="endTime">Ora de sfârșit:</label>
+        <input type="time" id="endTime" name="endTime">
+
+            <label for="department">Departament:</label>
+            <select id="department" name="department">
+                <option value="">Selectați un departament</option>
+                <!-- iterate through the list of departments and create an option for each one -->
+                <option th:each="department : ${departmentList}"
+                        th:value="${department.id}"
+                        th:text="${department.name}">
+                </option>
+            </select>
+
+
+        <label for="doctor">Doctor:</label>
+        <select id="doctor" name="doctor">
+            <option value="">Selectați un doctor</option>
+            <!-- Arată doctorii disponibili în funcție de departamentul selectat -->
+            <option th:each="doctor : ${doctors}"
+                    th:value="${doctor.id}"
+                    th:if="${doctor.department.id == selectedDepartmentId or selectedDepartmentId == null}"
+                    th:text="${doctor.name}">
+            </option>
+        </select>
+
+        <button type="submit">Trimiteți programarea</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
