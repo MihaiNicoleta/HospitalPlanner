@@ -119,48 +119,157 @@ box-shadow: inset 0px 0px 5px rgba(0,0,0,0.2);
     }
 
 
-
-
-
-
     </style>
+    <title>Make an Appointment</title>
+    <script>
+        function updateDoctorList() {
+            var departmentSelect = document.getElementById("department");
+            var selectedDepartment = departmentSelect.value;
+            var doctorSelect = document.getElementById("doctor");
+            doctorSelect.innerHTML = ""; // Elimină toate opțiunile existente înainte de a adăuga noile opțiuni
+
+            // Adaugă o opțiune "Selectați un doctor"
+            var selectOption = document.createElement("option");
+            selectOption.value = "";
+            selectOption.text = "Selectați un doctor";
+            doctorSelect.appendChild(selectOption);
+
+            switch (selectedDepartment) {
+                case "Cardiology":
+                    addDoctorsToSelect([
+                        { id: 21, name: "Dr. John Smith" },
+                        { id: 25, name: "Dr. James Wilson" },
+                        { id: 29, name: "Dr. Robert Baker" }
+                    ]);
+                    break;c
+                case "Dermatology":
+                    addDoctorsToSelect([
+                        { id: 22, name: "Dr. Sarah Brown" },
+                        { id: 26, name: "Dr. Jessica Clark" },
+                        { id:30, name: "Dr. Samantha Lee" }
+                    ]);
+                    break;
+                case "Endocrinology":
+                    addDoctorsToSelect([
+                        { id: 23, name: "Dr. David Johnson" },
+                        { id: 27, name: "Dr. Michael Taylor" }
+                    ]);
+                    break;
+                case "Gastroenterology":
+                    addDoctorsToSelect([
+                        { id: 24, name: "Dr. Michael Taylor" },
+                        { id: 28, name: "Dr. Elizabeth Martinez" }
+                    ]);
+                    break;
+            }
+        }
+
+        function addDoctorsToSelect(doctorList) {
+            var doctorSelect = document.getElementById("doctor");
+            doctorList.forEach(function(doctor) {
+                var option = document.createElement("option");
+                option.value = doctor.id;
+                option.text = doctor.name;
+                doctorSelect.appendChild(option);
+            });
+        }
+
+function validateForm() {
+    var dateInput = document.getElementById("date");
+    var startTimeInput = document.getElementById("startTime");
+    var endTimeInput = document.getElementById("endTime");
+
+    // Verifică completitudinea datelor
+    if (startTimeInput.value === "" || endTimeInput.value === "") {
+        alert("Vă rugăm să completați orele de început și sfârșit.");
+        return false;
+    }
+
+    // Verifică formatul datei
+    var datePattern = /^\d{4}-\d{2}-\d{2}$/;
+    if (!datePattern.test(dateInput.value)) {
+        alert("Data nu este în formatul corect. Utilizați formatul YYYY-MM-DD.");
+        return false;
+    }
+
+   var dateArray = dateInput.value.split(".");
+var day = parseInt(dateArray[0]);
+var month = parseInt(dateArray[1]);
+var year = parseInt(dateArray[2]);
+var formattedDate = year + "-" + padNumber(month) + "-" + padNumber(day);
+var date = new Date(formattedDate);
+
+    // Verifică formatul timpului de început
+    var timePattern = /^\d{2}:\d{2}$/;
+    if (!timePattern.test(startTimeInput.value)) {
+        alert("Ora de început nu este în formatul corect. Utilizați formatul HH:MM.");
+        return false;
+    }
+
+    // Verifică formatul timpului de sfârșit
+    if (!timePattern.test(endTimeInput.value)) {
+        alert("Ora de sfârșit nu este în formatul corect. Utilizați formatul HH:MM.");
+        return false;
+    }
+   // Converteste timpul de început și sfârșit în obiecte java.sql.Time
+var startHour = parseInt(startTimeArray[0]);
+var startMinute = parseInt(startTimeArray[1]);
+var startTimeString = startHour.toString().padStart(2, '0') + ':' + startMinute.toString().padStart(2, '0') + ':01';
+var startTime = java.sql.Time.valueOf(startTimeString);
+
+
+var endHour = parseInt(endTimeArray[0]);
+var endMinute = parseInt(endTimeArray[1]);
+
+var endTimeString = endHour.toString().padStart(2, '0') + ':' + endMinute.toString().padStart(2, '0') + ':01';
+var endTime = java.sql.Time.valueOf(endTimeString);
+
+// Seteaza valorile timpului convertit in obiectul appointment
+appointment.startTime = startTime;
+appointment.endTime = endTime;
+
+    return true;
+}
+function padNumber(number) {
+  return number < 10 ? "0" + number : number;
+}
+
+
+    </script>
 </head>
-<body><h1>Make an Appointment</h1>
+<body>
+<h1>Make an Appointment</h1>
 <div class="transparent-background">
-    <div class="form-container"><h1>Choose the convenient day and time</h1>
-        <label for="date">Data:</label> <input type="date" id="date"
-                                               name="date"> <label
-                for="startTime">Ora de început:</label>
-        <input type="time" id="startTime" name="startTime">
-
-        <label for="endTime">Ora de sfârșit:</label>
-        <input type="time" id="endTime" name="endTime">
-
+    <div class="form-container">
+        <h1>Choose the convenient day and time</h1>
+        <form method="post" action="/users/pacient_menu/appointment" onsubmit="return validateForm()">
+            <label for="date">Data:</label>
+            <input type="date" id="date" name="date">
+            <label for="startTime">Ora de început:</label>
+            <input type="time" id="startTime" name="startTime">
+            <label for="endTime">Ora de sfârșit:</label>
+            <input type="time" id="endTime" name="endTime">
             <label for="department">Departament:</label>
-            <select id="department" name="department">
+            <select id="department" name="department" onchange="updateDoctorList()">
                 <option value="">Selectați un departament</option>
-                <!-- iterate through the list of departments and create an option for each one -->
-                <option th:each="department : ${departmentList}"
-                        th:value="${department.id}"
-                        th:text="${department.name}">
-                </option>
+                <option value="Cardiology">Cardiology</option>
+                <option value="Dermatology">Dermatology</option>
+                <option value="Endocrinology">Endocrinology</option>
+                <option value="Gastroenterology">Gastroenterology</option>
             </select>
+            <label for="doctor">Doctor:</label>
+            <select id="doctor" name="doctor">
+                <option value="">Selectați un doctor</option>
+            </select>
+            <button type="submit">Trimiteți programarea</button>
+            <div th:if="${session.eroare}" class="my-3">
+                <p class="text-danger">Invalid date and time</p>
+            </div>
 
 
-        <label for="doctor">Doctor:</label>
-        <select id="doctor" name="doctor">
-            <option value="">Selectați un doctor</option>
-            <!-- Arată doctorii disponibili în funcție de departamentul selectat -->
-            <option th:each="doctor : ${doctors}"
-                    th:value="${doctor.id}"
-                    th:if="${doctor.department.id == selectedDepartmentId or selectedDepartmentId == null}"
-                    th:text="${doctor.name}">
-            </option>
-        </select>
-
-        <button type="submit">Trimiteți programarea</button>
         </form>
     </div>
 </div>
+
 </body>
 </html>
