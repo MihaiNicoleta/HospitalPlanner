@@ -10,19 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import proiect.demo.Domain.Department;
-import proiect.demo.Domain.User;
-import proiect.demo.Domain.UserDto;
-import proiect.demo.Services.DepartmentService;
-import proiect.demo.Services.DoctorService;
-import proiect.demo.Services.JwtService;
-import proiect.demo.Services.UserService;
+import proiect.demo.Domain.*;
+import proiect.demo.Services.*;
 import proiect.demo.configs.ApplicationConfig;
 import proiect.demo.models.AuthenticationRequest;
 import proiect.demo.models.AuthenticationResponse;
 import proiect.demo.models.RegisterRequest;
 import proiect.demo.models.RegisterResponse;
 
+import java.sql.Time;
 import java.util.List;
 
 @Controller
@@ -33,7 +29,9 @@ public class UserController {
     private final UserService userService;
     private final JwtService jwtService;
     private final DepartmentService departmentService;
+    private final DoctorService doctorService;
     private final ApplicationConfig applicationConfig;
+    private final AppointmentService appointmentService;
 
     @GetMapping("/login2")
     public String showLoginForm() {
@@ -78,20 +76,47 @@ public class UserController {
             return "login";
         } else {
             model.addAttribute("email", user.getEmail());
-            return "redirect:/users/app";
+            model.addAttribute("userId", user.getId());
+            return "redirect:/users/pacient_menu";
+        }
+    }
+
+
+    @PostMapping("/pacient_menu/appointment")
+    public String saveAppointment(@ModelAttribute @Valid Appointment appointment, BindingResult result, RedirectAttributes redirectAttributes, HttpSession session) {
+        System.out.println("AICI 1");
+        Integer patientId = (Integer) session.getAttribute("userId");
+
+        // Verificați dacă pacientul este autentificat
+        if (patientId == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Nu sunteți autentificat!");
+            return "redirect:/users/login2";
+        }
+
+        // Setați ID-ul pacientului în obiectul appointment
+        appointment.setPatient(userService.getPatientById(patientId));
+        if (result.hasErrors()) {
+            System.out.println("Erori de validare: " + result.getAllErrors());
+            return "appointment";
+        }
+        try {
+            System.out.println("AIci 2");
+            appointmentService.save(appointment, session);
+            redirectAttributes.addFlashAttribute("successMessage", "Programarea a fost salvată cu succes!");
+            return "redirect:/users/pacient_menu";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "A apărut o eroare la salvarea programării: " + e.getMessage());
+            return "redirect:/users/pacient_menu/appointment";
         }
     }
 
     @GetMapping("/pacient_menu/appointment")
-    public String showDepartments(Model model) {
-        List<Department> departments = departmentService.getAllDepartments();
-        model.addAttribute("departmentList", departments);
+    public String showAppointmentForm(Model model) {
+        List<Department> departmentList = departmentService.getAllDepartments();
+        model.addAttribute("departmentList", departmentList);
+        List<Doctor> doctorList = doctorService.getAllDoctors();
+        model.addAttribute("doctorList", doctorList);
         return "appointment";
-    }
-
-    @GetMapping("pacient_menu/find_doctor")
-    public String find_doctor() {
-        return "find_doctor";
     }
 
     @GetMapping("pacient_menu/find_doctor/result")
