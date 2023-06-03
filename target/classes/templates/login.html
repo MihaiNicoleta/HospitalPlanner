@@ -6,16 +6,83 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
-         .logo { display: inline-block; height: 50px; width: 50px; background-image: url("https://live.staticflickr.com/65535/52937582366_47e668da36_n.jpg"); background-size: contain; background-repeat: no-repeat; margin-right: 10px; }
+body {
+	  background-image: url('https://live.staticflickr.com/65535/52941321373_f0acf4ae50_z.jpg');
+            background-repeat: no-repeat;
+            background-size:  cover;
+            background-size: 100% auto;
+    background-attachment: fixed;
+    background-position: center;
+			 font-family: Arial, sans-serif;
+}
+
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333333;
+}
+
+.alert {
+  margin-bottom: 20px;
+}
+
+form {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #007bff;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
 
     </style>
 </head>
 <body>
-<nav class="navbar navbar-dark bg-dark">
-    <div class="container"><a class="navbar-brand" href="#">
-        <div class="logo"></div>
-        Our Hospital </a></div>
-</nav>
 <main class="container my-5"><h1>Login Form</h1>
     <form method="post" action="/users/login2" class="my-4">
         <div class="form-group"><label for="email">Email:</label> <input type="email" name="email" id="email"

@@ -34,6 +34,12 @@ public class DoctorController {
         List<Doctor> doctors = doctorService.getAllDoctors();
         return new ResponseEntity<>(doctors, HttpStatus.OK);
     }
+
+    @GetMapping("/doctor_menu")
+    public String pacient_menu() {
+        return "doctor_menu";
+    }
+
     @GetMapping("/department/{departmentId}")
     public String getDoctorsByDepartment(@PathVariable Integer departmentId, Model model) {
         List<Doctor> doctorList = doctorService.getDoctorsByDepartment(departmentId);

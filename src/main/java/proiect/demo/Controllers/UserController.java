@@ -48,6 +48,10 @@ public class UserController {
         return "pacient_menu";
     }
 
+    @GetMapping("pacient_menu/find_doctor")
+    public String find_doctor() {
+        return "find_doctor";
+    }
 
     @GetMapping("/index")
     public String home() {
@@ -175,7 +179,7 @@ public class UserController {
 
             userService.register(registerRequest);
             redirectAttributes.addFlashAttribute("registerSuccess", true);
-            return "redirect:/users/register";
+            return "redirect:/users/login2";
         } catch (DataIntegrityViolationException e) {
             redirectAttributes.addFlashAttribute("errorMessage", "User already exists");
             return "redirect:/users/register";
@@ -184,6 +188,4 @@ public class UserController {
             return "redirect:/users/register";
         }
     }
-
-
 }

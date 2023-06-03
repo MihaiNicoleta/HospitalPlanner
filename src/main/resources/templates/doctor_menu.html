@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Find a Doctor</title>
+    <style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: "Lato", sans-serif;
+		}
+		body {
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 1.5;
+			 background-image: url('https://static.vecteezy.com/system/resources/previews/001/882/906/original/close-up-doctor-with-stethoscope-background-vector.jpg');
+            background-repeat: no-repeat;
+            background-size:  cover;
+            background-size: 100% auto;
+    background-attachment: fixed;
+    background-position: center;
+			 font-family: Arial, sans-serif;
+			height: 600px;
+		}
+		header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			background-color: #00337f;
+			color: #fff;
+			padding: 6px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+		}
+		.logo img {
+			width: 100px;
+			height: auto;
+		}
+		nav ul {
+			list-style: none;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+		nav ul li {
+			margin-right: 20px;
+		}
+		nav ul li a {
+			color: #fff;
+			text-decoration: none;
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+		nav ul li a:hover {
+			color: #ccc;
+		}
+		.find-a-doctor {
+			padding: 50px;
+			background-color: rgba(255, 255, 255, 0.8);
+			margin: auto;
+			margin-top: 50px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			border-radius: 5px;
+			max-width: 700px;
+		}
+		.find-a-doctor h1 {
+			font-size: 32px;
+			margin-bottom: 20px;
+			text-align: center;
+		}
+		.find-a-doctor form {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.find-a-doctor label {
+margin-bottom: 10px;
+font-weight: bold;
+}
+
+.find-a-doctor input[type="submit"] {
+background-color: #00337f;
+color: #fff;
+border: none;
+padding: 10px 20px;
+border-radius: 5px;
+cursor: pointer;
+font-size: 16px;
+margin-top: 20px;
+text-transform: uppercase;
+font-weight: bold;
+transition: all 0.2s ease-in-out;
+}
+
+.find-a-doctor input[type="submit"]:hover {
+background-color: #ccc;
+color: #00337f;
+transition: all 0.2s ease-in-out;
+border: none;
+}
+
+.find-a-doctor select {
+font-size: 16px;
+padding: 10px;
+border-radius: 5px;
+border: 1px solid #ccc;
+width: 100%;
+margin: 10px 0;
+}
+
+.find-a-doctor option {
+font-size: 16px;
+}
+
+		.footer {
+            display: flex;
+			align-items: center;
+			justify-content: space-between;
+			background-color: #00337f;
+			color: #fff;
+			padding: 20px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			position: absolute;
+             bottom: 0;
+             left: 0;
+             right: 0;
+             height: 100px;
+     }
+
+		.footer .content p {
+			margin-bottom: 5px;
+			text-align: left;
+		}
+		.footer .links ul {
+			list-style: none;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+		.footer .links ul li {
+			margin-right: 20px;
+		}
+		.footer .links ul li a {
+			color: #fff;
+			text-decoration: none;
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+		.footer .links ul li a:hover {
+			color: #ccc;
+		}
+.top-specialties {
+    background-color: #f6f6f6;
+    padding: 50px;
+    margin-top: 150px;
+    max-width: 1300px;
+}
+
+.welcome {
+      text-align: center;
+      padding: 50px;
+    }
+
+.button-check-schedule a,
+.button-medical-history a,
+.button-patients-contact a,
+.button-plan-time-off a,
+.button-request-hospital-supplies  a {
+  color: #325BBF;
+  font-weight: bold;
+  font-size: 20px;
+}
+ .welcome h2 {
+      font-size: 36px;
+      font-weight: bold;
+      text-align: center;
+      padding: 10px 0;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 0;
+      margin-bottom: 20px;
+       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 8px #1e4770;
+    }
+
+.buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+.button-check-schedule,
+.button-medical-history,
+.button-patients-contact,
+.button-plan-time-off,
+.button-request-hospital-supplies {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+  margin: 10px;
+  padding: 30px;
+  width: calc(50% - 30px);
+  max-width: 500px;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.button-check-schedule:hover,
+.button-medical-history:hover,
+.button-patients-contact:hover,
+.button-plan-time-off:hover,
+.button-request-hospital-supplies:hover {
+  transform: translateY(-10px);
+}
+
+.button-check-schedule:hover span {
+  transform: translateX(-200%);
+}
+
+.button-patients-contact:hover span {
+  transform: translateX(200%);
+}
+
+.button-plan-time-off:hover span {
+  transform: translateY(200%);
+}
+
+
+	.contacts {
+		background-color: white;
+		padding: 50px;
+		text-align: center;
+		margin: 50px 10%;
+		box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+	}
+
+	.contacts h3 {
+		font-size: 2rem;
+		margin-bottom: 30px;
+		color: #333333;
+	}
+
+	.contacts form {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.contacts label {
+		font-size: 1.2rem;
+		margin-right: 10px;
+		color: #333333;
+	}
+
+	.contacts input[type="text"],
+	.contacts input[type="email"],
+	.contacts textarea {
+		margin-right: 10px;
+		padding: 10px;
+		border-radius: 5px;
+		border: none;
+		width: 250px;
+		font-size: 1.2rem;
+		margin-bottom: 10px;
+	}
+
+	.contacts textarea {
+		height: 150px;
+	}
+
+	.contacts input[type="submit"] {
+		background-color: #0074C2;
+		color: white;
+		padding: 10px 20px;
+		border-radius: 5px;
+		border: none;
+		font-weight: bold;
+		transition: all ease-in-out 0.3s;
+		cursor: pointer;
+	}
+
+	.contacts input[type="submit"]:hover {
+		transform: translateY(-5px);
+		background-color: #005EA0;
+		box-shadow: none;
+	}
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <img src="https://live.staticflickr.com/65535/52938325014_23e12349b1.jpg" alt="NYC Health + Hospitals">
+    </div>
+    <nav>
+        <ul>
+            <li><a href="../pacient_menu">Home</a></li>
+            <li><a href="">Check colleagues</a></li>
+            <li><a href="../pacient_menu#contacts">Contact Us</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="welcome">
+    <h2>now YOU CAN:</h2>
+    <div class="buttons">
+        <button class="button-check-schedule"><a href="">CHECK SCHEDULE</a></button>
+        <button class="button-medical-history"><a href="">MEDICAL HISTORY</a></button>
+        <button class="button-patients-contact"><a href="">PATIENTS CONTACT</a></button>
+        <button class="button-plan-time-off"><a href="#symptoms">PLAN TIME OFF</a></button>
+        <button class="button-request-hospital-supplies"><a href="#services">REQUEST HOSPITAL SUPPLIES</a> </button>
+    </div>
+</div>
+
+<section class="contacts" id="contacts">
+    <h3>CONSULT WITH COLLEGUES</h3>
+    <form action="#" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name..." required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email..." required>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" placeholder="Enter your message..." required></textarea>
+        <input type="submit" value="Submit"/>
+    </form>
+</section>
+<div>cv</div>
+</body>
+</html>
