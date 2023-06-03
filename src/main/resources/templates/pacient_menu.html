@@ -1,98 +1,67 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Clinic</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <style>
-		body {
-		background-image: url("https://live.staticflickr.com/65535/52937717376_b6f898dd53_z.jpg");
-			font-family: Arial, sans-serif;
-			font-size: 16px;
-			line-height: 1.5;
-			background-color: #f2f2f2;
-			color: #333333;
-			margin: 0;
-			padding: 0;
+    body {
+      background-image: url('https://hips.hearstapps.com/hmg-prod/images/types-of-doctors-1600114658.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:*');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-size: 100% auto;
+      background-attachment: fixed;
+      background-position: center;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      background-color: #f2f2f2;
+      color: #333333;
+      margin: 0;
+      padding: 0;
+    }
+    .button-services span,
+    .button-find-doctor span,
+    .button-check-symptoms span,
+    .button-make-appointment span {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      color: #333;
+    }
+header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			background-color: #00337f;
+			color: #fff;
+			padding: 6px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 		}
-
-		.header {
-  background- colour:blue;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 75px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-}
-
-.header-logo img {
-  height: 50px;
-}
-
-.header-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-.header-nav li {
-  margin-right: 25px;
-}
-
-.header-nav a {
-  display: block;
-  text-decoration: none;
-  font-size: 20px;
-  color: #fff;
-  text-transform: uppercase;
-  transition: color 0.3s ease-in-out;
-}
-
-.header-nav a:hover {
-  color: #1b9cfc;
-}
-
-
-
-.logo {
-  font-size: 36px;
-  color: #333;
-  font-weight: bold;
-  text-decoration: none;
-margin-right: 15px;
-}
-
-
-.main-nav li {
-margin-right: 25px;
-min-width: 4rem; /* adaugam o latime minima de 4rem */
-}
-
-.main-nav a {
-display: block;
-padding: 10px;
-text-decoration: none;
-font-size: 20px;
-color: #333;
-text-transform: uppercase;
-transition: color 0.3s ease-in-out;
-min-width: 4rem; /* adaugam o latime minima de 4rem /
-text-align: center; / centram textul */
-}
-
-.main-nav a:hover {
-color: #1b9cfc;
-}
-
-.menu-icon {
-display: none;
-cursor: pointer;
-}
-
+		.logo img {
+			width: 100px;
+			height: auto;
+		}
+		nav ul {
+			list-style: none;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+		nav ul li {
+			margin-right: 20px;
+		}
+		nav ul li a {
+			color: #fff;
+			text-decoration: none;
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+		nav ul li a:hover {
+			color: #ccc;
+		}
 		.main-image {
 			background-image: url("https://live.staticflickr.com/65535/52937717376_b6f898dd53_z.jpg");
 			background-size: cover;
@@ -342,95 +311,6 @@ cursor: pointer;
     align-items: center;
     margin-right: 20px;
 }
-
-	.footer {
-		background-color: #333333;
-		color: white;
-		padding: 20px;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		position: relative;
-		bottom: 0;
-		width: 100%;
-		margin-top: auto;
-	}
-
-	.footer p {
-		font-size: 1.2rem;
-		margin: 0;
-	}
-
-	.footer a {
-		color: white;
-		text-decoration: none;
-		font-weight: bold;
-	}
-
-	.social-icons {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.social-icons li {
-		margin: 0 10px;
-		list-style: none;
-	}
-
-	.social-icons a {
-		color: white;
-		font-size: 1.8rem;
-		transition: all ease-in-out 0.3s;
-	}
-
-	.social-icons a:hover {
-		transform: translateY(-2px);
-		color: #0074C2;
-	}
-
-	@media screen and (max-width: 2000px) {
-		.logo {
-			margin-right: 0;
-		}
-
-		.main-nav {
-			display: none;
-		}
-
-		.menu-icon {
-			display: block;
-			font-size: 2rem;
-			margin-left: auto;
-			cursor: pointer;
-		}
-
-		.menu-icon i {
-			color: white;
-			line-height: inherit;
-		}
-
-		.active .menu-icon i {
-			color: #0074C2;
-		}
-
-		.active .main-nav {
-			display: flex;
-			flex-direction: column;
-			position: absolute;
-			top: 100%;
-			left: 0;
-			width: 100%;
-			padding: 20px;
-			background-color: #0074C2;
-			z-index: 1;
-		}
-
-		.active .main-nav li {
-			margin: 10px 0;
-		}
-
-
 		.welcome {
   display: flex;
   flex-direction: column;
@@ -438,62 +318,58 @@ cursor: pointer;
   justify-content: center;
   margin-top: 50px;
 }
-.welcome h2 {
-  font-size: 36px;
-  font-weight: bold;
-  text-align: center;
-  padding: 20px 0;
-  color: #333;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  border-bottom: 2px solid #ccc;
-  margin-top: 0;
-  margin-bottom: 30px;
-}
+.welcome {
+      text-align: center;
+      padding: 50px;
+    }
 
+ .welcome h2 {
+      font-size: 36px;
+      font-weight: bold;
+      text-align: center;
+      padding: 20px 0;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-bottom: 2px solid #ccc;
+      margin-top: 0;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
 .buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
-  max-width: 1000px;
-  margin-top: 10px;
-}
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
 
-.button-services,
-.button-find-doctor,
-.button-check-symptoms,
-.button-make-appointment {
-  margin: 20px;
-  padding: 20px 40px;
-  border: none;
-  border-radius: 50px;
-  font-size: 24px;
-  font-weight: bold;
-  color: white;
-  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
-  background: linear-gradient(to bottom right, #1B9CFC, #55E6C1);
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  max-width: 300px;
-  width: 100%;
-}
+    .button-services,
+    .button-find-doctor,
+    .button-check-symptoms,
+    .button-make-appointment {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+      margin: 10px;
+      padding: 30px;
+      width: calc(50% - 30px);
+      max-width: 500px;
+      border-radius: 10px;
+      transition: transform 0.3s ease-in-out;
+    }
 
-.button-services span,
-.button-find-doctor span,
-.button-check-symptoms span,
-.button-make-appointment span {
-  display: block;
-  transition: transform 0.5s;
-}
+    .button-services:hover,
+    .button-find-doctor:hover,
+    .button-check-symptoms:hover,
+    .button-make-appointment:hover {
+      transform: translateY(-10px);
+    }
 
-.button-services:hover span {
-  transform: translateY(-200%);
-}
+
+
 
 .button-find-doctor:hover span {
   transform: translateX(-200%);
@@ -507,57 +383,49 @@ cursor: pointer;
   transform: translateY(200%);
 }
 
-@media screen and (max-width: 768px) {
-  .buttons {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .button-services,
-  .button-find-doctor,
-  .button-check-symptoms,
-  .button-make-appointment {
-    margin: 20px 0;
-  }
+.logo img {
+			width: 100px;
+			width: 100px;
+			height: auto;
+		}
+		.button-find-doctor a,
+.button-make-appointment a,
+.button-check-symptoms a,
+.button-services a {
+  color: #325BBF;
+  font-weight: bold;
+  font-size: 20px;
 }
-
-	}
-
-
-
-
-
     </style>
 </head>
-<body>
-<header class="header">
-    <div class="header-logo">
-        <img src="/path/to/logo.png" alt="Logo"/>
+<body><header>
+    <div class="logo">
+        <img src="https://live.staticflickr.com/65535/52938325014_23e12349b1.jpg" alt="NYC Health + Hospitals">
     </div>
-    <nav class="header-nav">
+    <nav>
         <ul>
-            <li><a href="#box">Home</a></li>
-            <li><a href="#box">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#contacts">Contact</a></li>
+            <li><a href="pacient_menu" disabled>Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="pacient_menu/find_doctor">Find a Doctor</a></li>
+            <li><a href="#contacts">Contact Us</a></li>
         </ul>
     </nav>
 </header>
 
 <div class="welcome">
-    <h2>Welcome!</h2>
-    <div class="buttons">
-        <button class="button-services">Services</button>
-        <button class="button-find-doctor"><a href="pacient_menu/find_doctor">Find a Doctor</a></button>
-        <button class="button-check-symptoms">Check Symptoms</button>
-        <button class="button-make-appointment"><a href="pacient_menu/appointment">Make an Appointment</a></button>
-    </div>
+<h2>now YOU CAN:</h2>
+<div class="buttons">
+    <button class="button-find-doctor"><a href="pacient_menu/find_doctor">FIND A DOCTOR</a></button>
+    <button class="button-make-appointment"><a href="pacient_menu/appointment">MAKE AN APPOINTMENT</a></button>
+    <button class="button-check-symptoms"><a href="#symptoms">CHECK SYMPTOMS</a></button>
+    <button class="button-services"><a href="#services">SEE OTHER SERVICES</a> </button>
+
+</div>
 </div>
 
-<section class="box">
+<section class="box" id="about">
     <h3>About Us</h3>
-    <p>My Clinic was founded in 1998 with the aim of providing the best medical care to its patients. With over 20 years
+    <p>My Clinic was founded in 2023 with the aim of providing the best medical care to its patients. With 20 years
         of experience in the field, we have the expertise and technology to provide state-of-the-art medical care.</p>
     <a href="#" class="btn-cta">Learn More</a>
 </section>
@@ -627,14 +495,6 @@ cursor: pointer;
     </form>
 </section>
 
-<footer class="footer">
-    <p>© 2021 My Clinic. All rights reserved.</p>
-    <ul class="social-icons">
-        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-    </ul>
-</footer>
 
 <script src="https://kit.fontawesome.com/3f79b074a1.js" crossorigin="anonymous"></script>
 <script>
