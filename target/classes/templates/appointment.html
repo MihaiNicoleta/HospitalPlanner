@@ -162,6 +162,7 @@ box-shadow: inset 0px 0px 5px rgba(0,0,0,0.2);
     }
 
 
+
     </style>
     <title>Make an Appointment</title>
     <script>
@@ -222,60 +223,77 @@ function validateForm() {
     var startTimeInput = document.getElementById("startTime");
     var endTimeInput = document.getElementById("endTime");
 
-    // Verifică completitudinea datelor
     if (startTimeInput.value === "" || endTimeInput.value === "") {
         alert("Vă rugăm să completați orele de început și sfârșit.");
         return false;
     }
 
-    // Verifică formatul datei
     var datePattern = /^\d{4}-\d{2}-\d{2}$/;
     if (!datePattern.test(dateInput.value)) {
         alert("Data nu este în formatul corect. Utilizați formatul YYYY-MM-DD.");
         return false;
     }
 
-   var dateArray = dateInput.value.split(".");
-var day = parseInt(dateArray[0]);
-var month = parseInt(dateArray[1]);
-var year = parseInt(dateArray[2]);
-var formattedDate = year + "-" + padNumber(month) + "-" + padNumber(day);
-var date = new Date(formattedDate);
+    var selectedDate = new Date(dateInput.value);
+    var selectedDay = selectedDate.getDay();
 
-    // Verifică formatul timpului de început
+    if (selectedDay === 0 || selectedDay === 6) {
+        alert("Programările sunt permise doar de luni până vineri.");
+        return false;
+    }
+
     var timePattern = /^\d{2}:\d{2}$/;
     if (!timePattern.test(startTimeInput.value)) {
         alert("Ora de început nu este în formatul corect. Utilizați formatul HH:MM.");
         return false;
     }
 
-    // Verifică formatul timpului de sfârșit
     if (!timePattern.test(endTimeInput.value)) {
         alert("Ora de sfârșit nu este în formatul corect. Utilizați formatul HH:MM.");
         return false;
     }
-   // Converteste timpul de început și sfârșit în obiecte java.sql.Time
-var startHour = parseInt(startTimeArray[0]);
-var startMinute = parseInt(startTimeArray[1]);
-var startTimeString = startHour.toString().padStart(2, '0') + ':' + startMinute.toString().padStart(2, '0') + ':01';
-var startTime = java.sql.Time.valueOf(startTimeString);
 
+    var startTime = new Date(selectedDate.toDateString() + " " + startTimeInput.value);
+    var endTime = new Date(selectedDate.toDateString() + " " + endTimeInput.value);
+   var startHour = parseInt(startTimeInput.value.split(':')[0]);
+   var endHour = parseInt(endTimeInput.value.split(':')[0]);
 
-var endHour = parseInt(endTimeArray[0]);
-var endMinute = parseInt(endTimeArray[1]);
+   if (startHour < 8 || endHour > 15) {
+       alert("Intervalele de programare sunt permise numai între orele 8:00 și 15:00.");
+       return false;
+   }
 
-var endTimeString = endHour.toString().padStart(2, '0') + ':' + endMinute.toString().padStart(2, '0') + ':01';
-var endTime = java.sql.Time.valueOf(endTimeString);
+    if (startTime >= endTime) {
+        alert("Ora de început trebuie să fie înaintea orei de sfârșit.");
+        return false;
+    }
 
-// Seteaza valorile timpului convertit in obiectul appointment
-appointment.startTime = startTime;
-appointment.endTime = endTime;
+    var appointmentDuration = (endTime - startTime) / (1000 * 60 * 60); // Durata în ore
 
+    if (appointmentDuration > 2) {
+        alert("Durata programării nu poate depăși 2 ore.");
+        return false;
+    }
+    var departmentSelect = document.getElementById("department");
+var selectedDepartment = departmentSelect.value;
+var doctorSelect = document.getElementById("doctor");
+
+  if (selectedDepartment.value === "") {
+            alert("Vă rugăm să selectați un departament.");
+            return false;
+        }
+
+        if (doctorSelect.value === "") {
+            alert("Vă rugăm să selectați un doctor.");
+            return false;
+        }
     return true;
 }
+
 function padNumber(number) {
   return number < 10 ? "0" + number : number;
 }
+
 
 
     </script>
@@ -299,15 +317,15 @@ function padNumber(number) {
     <div class="form-container">
         <h2>Choose the convenient day and time</h2>
         <form method="post" action="/users/pacient_menu/appointment" onsubmit="return validateForm()">
-            <label for="date">Data:</label>
+            <label for="date">Date:</label>
             <input type="date" id="date" name="date">
-            <label for="startTime">Ora de început:</label>
+            <label for="startTime">Start time:</label>
             <input type="time" id="startTime" name="startTime">
-            <label for="endTime">Ora de sfârșit:</label>
+            <label for="endTime">End time:</label>
             <input type="time" id="endTime" name="endTime">
-            <label for="department">Departament:</label>
+            <label for="department">Department:</label>
             <select id="department" name="department" onchange="updateDoctorList()">
-                <option value="">Selectați un departament</option>
+                <option value="">Select a department</option>
                 <option value="Cardiology">Cardiology</option>
                 <option value="Dermatology">Dermatology</option>
                 <option value="Endocrinology">Endocrinology</option>
@@ -315,15 +333,27 @@ function padNumber(number) {
             </select>
             <label for="doctor">Doctor:</label>
             <select id="doctor" name="doctor">
-                <option value="">Selectați un doctor</option>
+                <option value="">Select a doctor</option>
             </select>
-            <button type="submit">Trimiteți programarea</button>
+            <button type="submit">Submit the schedule</button>
             <div th:if="${session.eroare}" class="my-3">
-                <p class="text-danger">Invalid date and time</p>
+                <p class="text-danger">Appointment unavailable, choose another time or date</p>
             </div>
 
 
         </form>
+        <form action="/pacient_menu/appointment/freeAppointments" method="post">
+            <select name="departmentId">
+                <option value="10">Cardiology</option>
+                <option value="11">Dermatology</option>
+                <option value="12">Endocrinology</option>
+                <option value="13">Gastroenterology</option>
+
+                <!-- Adăugați opțiuni pentru toate departamentele disponibile -->
+            </select>
+            <button type="submit">Obțineți programările libere</button>
+        </form>
+
     </div>
 </div>
 

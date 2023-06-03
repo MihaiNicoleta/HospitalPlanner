@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Free Appointments</title>
+</head>
+<body>
+<h1>Free Appointments</h1>
+<table>
+    <tr>
+        <th>Doctor Name</th>
+        <th>Available Time Slots</th>
+    </tr>
+    <tr th:each="appointment : ${freeAppointments}">
+        <td th:text="${appointment.doctorName}"></td>
+        <td>
+            <ul>
+                <li th:each="timeSlot : ${appointment.availableTimeSlots}"
+                    th:text="${timeSlot.startTime} + ' - ' + ${timeSlot.endTime}"></li>
+            </ul>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
