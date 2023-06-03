@@ -58,6 +58,11 @@ public class UserController {
         return "index"; // return the name of the HTML file for the home page
     }
 
+    @GetMapping("/pacient_menu/appointment/freeAppointments")
+    public String free_appointments() {
+        return "free_appointments";
+    }
+
     @PostMapping(value = "/login2")
     public String login(@ModelAttribute AuthenticationRequest request, Model model, HttpSession session) {
         AuthenticationResponse authenticationResponse = userService.login(request);
@@ -83,6 +88,15 @@ public class UserController {
             model.addAttribute("userId", user.getId());
             return "redirect:/users/pacient_menu";
         }
+    }
+
+    @PostMapping("/pacient_menu/appointment/freeAppointments")
+    public String getFreeAppointments(@RequestParam("departmentId") int departmentId, Model model) {
+        System.out.println("OKK" + departmentId);
+        List<Appointment> freeAppointments = appointmentService.getFreeAppointments(departmentId);
+        System.out.println("DA 4" + freeAppointments);
+        model.addAttribute("freeAppointments", freeAppointments);
+        return "redirect:/pacient_menu/appointment/freeAppointments";
     }
 
 

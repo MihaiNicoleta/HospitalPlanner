@@ -9,14 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import proiect.demo.Domain.Appointment;
-import proiect.demo.Domain.AvailableSlot;
-import proiect.demo.Domain.Doctor;
-import proiect.demo.Domain.User;
-import proiect.demo.Repostiories.AppointmentRepository;
-import proiect.demo.Repostiories.AvailableSlotRepository;
-import proiect.demo.Repostiories.DoctorRepository;
-import proiect.demo.Repostiories.UserRepository;
+import proiect.demo.Domain.*;
+import proiect.demo.Repostiories.*;
 import proiect.demo.configs.ResourceNotFoundException;
 
 
@@ -24,14 +18,19 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AppointmentService {
 
     @Autowired
     private AppointmentRepository appointmentRepository;
+    @Autowired
+
+    private DepartmentRepository departmentRepository;
 
     public List<Appointment> getAllAppointments() {
         return appointmentRepository.findAll();
@@ -75,6 +74,71 @@ public class AppointmentService {
                 throw new RuntimeException("Intervalul dvs. se suprapune cu o altă programare existentă.");
             }
         }
+    }
+    public List<Appointment> getFreeAppointments(int departmentId) {
+        // Obțineți departamentul pe baza id-ului
+        Optional<Department> department = departmentRepository.findById(departmentId);
+        System.out.println("DA 1 "+ department);
+        // Obțineți lista de doctori din departament
+        List<Doctor> doctors = doctorRepository.findByDepartmentId(departmentId);
+        System.out.println("DA 2" + doctors);
+        List<Appointment> freeAppointments = new ArrayList<>();
+
+        for (Doctor doctor : doctors) {
+            // Obțineți programările existente ale doctorului
+            List<Appointment> existingAppointments = appointmentRepository.findByDoctorAndDate(doctor, new Date());
+
+            // Verificați intervalele orare libere pentru doctor
+            List<TimeSlot> freeTimeSlots = getFreeTimeSlots(existingAppointments);
+            System.out.println("DA 3" + freeTimeSlots);
+            // Creați obiectul Appointment pentru fiecare interval orar liber
+            for (TimeSlot timeSlot : freeTimeSlots) {
+                Appointment appointment = new Appointment();
+                appointment.setDoctor(doctor);
+                appointment.setStartTime(timeSlot.getStartTime());
+                appointment.setEndTime(timeSlot.getEndTime());
+                appointment.setDate(new Date());
+                appointment.setStatus("Free");
+
+                freeAppointments.add(appointment);
+            }
+        }
+
+        return freeAppointments;
+    }
+
+    private List<TimeSlot> getFreeTimeSlots(List<Appointment> existingAppointments) {
+        List<TimeSlot> freeTimeSlots = new ArrayList<>();
+        LocalTime startTime = LocalTime.of(8, 0); // Ora de început (8:00 AM)
+        LocalTime endTime = LocalTime.of(15, 0); // Ora de sfârșit (3:00 PM)
+
+        // Generați toate intervalele orare între ora de început și ora de sfârșit
+        while (startTime.isBefore(endTime)) {
+            LocalTime nextTime = startTime.plusMinutes(30); // Durata programării este de 30 de minute
+            TimeSlot timeSlot = new TimeSlot(startTime, nextTime);
+
+            boolean isFree = true;
+
+            // Verificați dacă intervalul orar este deja ocupat
+            for (Appointment appointment : existingAppointments) {
+                if (isOverlapping(appointment.getStartTime(), appointment.getEndTime(), startTime, nextTime)) {
+                    isFree = false;
+                    break;
+                }
+            }
+
+            if (isFree) {
+                freeTimeSlots.add(timeSlot);
+            }
+
+            startTime = nextTime;
+        }
+
+        return freeTimeSlots;
+    }
+
+    private boolean isOverlapping(LocalTime start1, LocalTime end1, LocalTime start2, LocalTime end2) {
+        return start1.isBefore(end2) && end1.isAfter(start2);
     }
 
 
