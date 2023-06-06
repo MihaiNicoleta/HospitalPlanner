@@ -36,4 +36,19 @@ public class Doctor {
     @Column(name = "department_id")
     private Integer departmentId;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getCabinetNumber() {
+        return cabinetNumber;
+    }
+
+    public void setCabinetNumber(int cabinetNumber) {
+        this.cabinetNumber = cabinetNumber;
+    }
 }

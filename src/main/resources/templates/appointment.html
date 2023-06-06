@@ -110,7 +110,12 @@ box-shadow: inset 0px 0px 5px rgba(0,0,0,0.2);
     select {
         width: 100%;
     }
-
+.success-message {
+    background-color: #00FF00;
+    color: #000;
+    padding: 10px;
+    margin-bottom: 10px;
+}
     .form-container {
         background-color: rgba(255, 255, 255, 0.8);
         border-radius: 10px;
@@ -339,10 +344,15 @@ function padNumber(number) {
             <div th:if="${session.eroare}" class="my-3">
                 <p class="text-danger">Appointment unavailable, choose another time or date</p>
             </div>
+            <!-- Add this code at the beginning of the file -->
+            <div th:if="${successMessage}" class="success-message">
+                <p th:text="${successMessage}"></p>
+            </div>
+
 
 
         </form>
-        <form action="/pacient_menu/appointment/freeAppointments" method="post">
+        <form action="/users/pacient_menu/appointment/freeAppointments" method="post">
             <select name="departmentId">
                 <option value="10">Cardiology</option>
                 <option value="11">Dermatology</option>
