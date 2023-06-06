@@ -96,7 +96,7 @@ public class UserController {
         List<Appointment> freeAppointments = appointmentService.getFreeAppointments(departmentId);
         System.out.println("DA 4" + freeAppointments);
         model.addAttribute("freeAppointments", freeAppointments);
-        return "redirect:/pacient_menu/appointment/freeAppointments";
+        return "free_appointments";
     }
 
 
@@ -121,7 +121,7 @@ public class UserController {
             System.out.println("AIci 2");
             appointmentService.save(appointment, session);
             redirectAttributes.addFlashAttribute("successMessage", "Programarea a fost salvată cu succes!");
-            return "redirect:/users/pacient_menu";
+            return "redirect:/users/pacient_menu/appointment";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "A apărut o eroare la salvarea programării: " + e.getMessage());
             return "redirect:/users/pacient_menu/appointment";

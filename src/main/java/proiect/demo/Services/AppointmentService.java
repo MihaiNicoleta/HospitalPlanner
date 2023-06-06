@@ -42,6 +42,7 @@ public class AppointmentService {
     private AppointmentRepository appointmentsRepository;
     private AppointmentService appointmentService;
     private UserService userService;
+    @Autowired
     private DoctorRepository doctorRepository;
     @Autowired
     private UserRepository userRepository;
@@ -85,13 +86,13 @@ public class AppointmentService {
         List<Appointment> freeAppointments = new ArrayList<>();
 
         for (Doctor doctor : doctors) {
-            // Obțineți programările existente ale doctorului
+            // programarile existente ale doctorului
             List<Appointment> existingAppointments = appointmentRepository.findByDoctorAndDate(doctor, new Date());
 
-            // Verificați intervalele orare libere pentru doctor
+            // intervalele libere
             List<TimeSlot> freeTimeSlots = getFreeTimeSlots(existingAppointments);
             System.out.println("DA 3" + freeTimeSlots);
-            // Creați obiectul Appointment pentru fiecare interval orar liber
+            // pt fiecare programare libera facem un appoiment
             for (TimeSlot timeSlot : freeTimeSlots) {
                 Appointment appointment = new Appointment();
                 appointment.setDoctor(doctor);
@@ -114,7 +115,7 @@ public class AppointmentService {
 
         // Generați toate intervalele orare între ora de început și ora de sfârșit
         while (startTime.isBefore(endTime)) {
-            LocalTime nextTime = startTime.plusMinutes(30); // Durata programării este de 30 de minute
+            LocalTime nextTime = startTime.plusMinutes(120); // Durata programării este de 30 de minute
             TimeSlot timeSlot = new TimeSlot(startTime, nextTime);
 
             boolean isFree = true;

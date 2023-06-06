@@ -2,20 +2,64 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Free Appointments</title>
+    <style>
+        body {
+            background-image: url('https://live.staticflickr.com/65535/52939897827_f16c54ba56_z.jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+
+        table {
+            margin: 20px auto;
+            background-color: #fff;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        th {
+            background-color: #000;
+            color: #fff;
+            padding: 10px;
+            text-align: left;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
 <h1>Free Appointments</h1>
 <table>
     <tr>
         <th>Doctor Name</th>
+        <th>Cabinet</th>
         <th>Available Time Slots</th>
     </tr>
     <tr th:each="appointment : ${freeAppointments}">
-        <td th:text="${appointment.doctorName}"></td>
+        <td th:text="${appointment.getDoctor().getName()}"></td>
+        <td th:text="${appointment.getDoctor().getCabinetNumber()}"></td>
         <td>
             <ul>
-                <li th:each="timeSlot : ${appointment.availableTimeSlots}"
-                    th:text="${timeSlot.startTime} + ' - ' + ${timeSlot.endTime}"></li>
+                <li th:each="timeSlot : ${appointment.getStartTime()}">
+                    <span th:text="${timeSlot} + ' - ' + ${appointment.getEndTime()}"></span>
+                </li>
             </ul>
         </td>
     </tr>
