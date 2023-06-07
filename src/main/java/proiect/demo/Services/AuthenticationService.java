@@ -16,6 +16,12 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final UserRepository repository;
 
+    /**
+     * Autentifică utilizatorul și generează un token JWT în cazul în care autentificarea este reușită.
+     *
+     * @param request Cererea de autentificare care conține adresa de e-mail și parola utilizatorului.
+     * @return Răspunsul de autentificare care conține token-ul JWT generat.
+     */
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -31,7 +37,12 @@ public class AuthenticationService {
         return AuthenticationResponse.builder().token(jwtToken)
                 .build();
     }
-
+    /**
+     * Verifică validitatea unui token JWT.
+     *
+     * @param authHeader Antetul de autorizare care conține token-ul JWT.
+     * @return `true` dacă token-ul este valid, altfel `false`.
+     */
     public boolean authorise(String authHeader) {
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return false;

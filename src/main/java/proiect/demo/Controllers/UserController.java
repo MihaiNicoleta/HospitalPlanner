@@ -16,11 +16,11 @@ import proiect.demo.configs.ApplicationConfig;
 import proiect.demo.models.AuthenticationRequest;
 import proiect.demo.models.AuthenticationResponse;
 import proiect.demo.models.RegisterRequest;
-import proiect.demo.models.RegisterResponse;
-
-import java.sql.Time;
 import java.util.List;
 
+/**
+ * Clasa controller care se ocupă de operațiile și rutele legate de pacienti.
+ */
 @Controller
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -33,22 +33,29 @@ public class UserController {
     private final ApplicationConfig applicationConfig;
     private final AppointmentService appointmentService;
     private final EmailService emailService;
-
+    /**
+     * Returnează vizualizarea formularului de autentificare.
+     *
+     * @return Numele vizualizării formularului de autentificare.
+     */
     @GetMapping("/login2")
     public String showLoginForm() {
         return "login";
     }
-
-    @GetMapping("/app")
-    public String app() {
-        return "app";
-    }
-
+    /**
+     * Returnează vizualizarea meniului pentru pacient.
+     *
+     * @return Numele vizualizării meniului pentru pacient.
+     */
     @GetMapping("/pacient_menu")
     public String pacient_menu() {
         return "pacient_menu";
     }
-
+    /**
+     * Returnează vizualizarea pentru găsirea doctorului.
+     *
+     * @return Numele vizualizării pentru găsirea doctorului.
+     */
     @GetMapping("pacient_menu/find_doctor")
     public String find_doctor() {
         return "find_doctor";
@@ -63,16 +70,14 @@ public class UserController {
     public String free_appointments() {
         return "free_appointments";
     }
-/*
-    @PostMapping(value = "/email")
-    public void sendEmail(@RequestParam("pacientId") int pacientId) {
-        // imi trb user id sa i iau mailul sa trimit la acel mail
-        User user = userService.getPatientById(pacientId);
-        String mail = user.getEmail();
-        String message = "Buna ziua " + user.getFirstName() + " !" + "\n" +
-                "Multumim ca ai apelat la noi!" + "\n" + "Acestea sunt detaliile programarii tale ";
-    }*/
-
+    /**
+     * Gestionează cererea de autentificare.
+     *
+     * @param request Obiectul AuthenticationRequest.
+     * @param model   Obiectul Model.
+     * @param session Obiectul HttpSession.
+     * @return Numele vizualizării pentru autentificarea cu succes sau eroare de autentificare.
+     */
     @PostMapping(value = "/login2")
     public String login(@ModelAttribute AuthenticationRequest request, Model model, HttpSession session) {
         AuthenticationResponse authenticationResponse = userService.login(request);
@@ -87,7 +92,6 @@ public class UserController {
 
         User user = userService.getPatientById(userId);
 
-        // Compare hashed passwords
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         if (user == null || !passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             model.addAttribute("error", true);
@@ -99,12 +103,16 @@ public class UserController {
             return "redirect:/users/pacient_menu";
         }
     }
-
+    /**
+     * Obține programările disponibile pentru un anumit departament.
+     *
+     * @param departmentId ID-ul departamentului.
+     * @param model        Obiectul Model.
+     * @return Numele vizualizării pentru programările disponibile.
+     */
     @PostMapping("/pacient_menu/appointment/freeAppointments")
     public String getFreeAppointments(@RequestParam("departmentId") int departmentId, Model model) {
-        System.out.println("OKK" + departmentId);
         List<Appointment> freeAppointments = appointmentService.getFreeAppointments(departmentId);
-        System.out.println("DA 4" + freeAppointments);
         model.addAttribute("freeAppointments", freeAppointments);
         return "free_appointments";
     }
@@ -141,7 +149,12 @@ public class UserController {
             return "redirect:/users/pacient_menu/appointment";
         }
     }
-
+    /**
+     * Returnează vizualizarea pentru formularul de programare a unei consultații.
+     *
+     * @param model Obiectul Model.
+     * @return Numele vizualizării pentru formularul de programare a unei consultații.
+     */
     @GetMapping("/pacient_menu/appointment")
     public String showAppointmentForm(Model model) {
         List<Department> departmentList = departmentService.getAllDepartments();
@@ -150,7 +163,13 @@ public class UserController {
         model.addAttribute("doctorList", doctorList);
         return "appointment";
     }
-
+    /**
+     * Obțineți doctorii pentru un anumit departament și afișează rezultatul.
+     *
+     * @param departmentSlug Slug-ul departamentului.
+     * @param model          Obiectul Model.
+     * @return Numele vizualizării cu doctorii pentru departamentul selectat sau vizualizarea de eroare.
+     */
     @GetMapping("pacient_menu/find_doctor/result")
     public String getDoctorsByDepartment(@RequestParam("department") String departmentSlug, Model model) {
         // obțineți id-ul departamentului din slug
@@ -169,24 +188,32 @@ public class UserController {
                 departmentId = 13;
                 break;
         }
-
-        // verificați dacă s-a reușit obținerea id-ului departamentului
         if (departmentId != null) {
-            // redirecționați utilizatorul către pagina cu doctorii pentru acel departament
             return "redirect:/doctors/department/" + departmentId;
         } else {
-            // afișați o eroare
             model.addAttribute("error", "Cannot find doctors for selected department!");
             return "find_doctor";
         }
     }
-
+    /**
+     * Returnează vizualizarea pentru formularul de înregistrare a utilizatorului.
+     *
+     * @param model Obiectul Model.
+     * @return Numele vizualizării pentru formularul de înregistrare a utilizatorului.
+     */
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
         return "register";
     }
-
+    /**
+     * Procesează cererea de înregistrare a utilizatorului.
+     *
+     * @param userDto            Obiectul User cu datele utilizatorului.
+     * @param result             Obiectul BindingResult pentru validarea datelor.
+     * @param redirectAttributes Obiectul RedirectAttributes pentru a seta atributele pentru redirecție.
+     * @return Numele vizualizării pentru autentificarea cu succes sau vizualizarea de înregistrare cu erori.
+     */
     @PostMapping("/register")
     public String register(@ModelAttribute @Valid User userDto, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {

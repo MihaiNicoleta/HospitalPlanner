@@ -23,7 +23,6 @@ public class JwtService {
     private String SECRET_KEY; //the secret key can be found in the application.properties
 
     private final UserRepository userRepository;
-    //private final UserDetailsService userDetailsService;
 
     public String extractUsername(String token) {
         return extractClaim(token,Claims::getSubject);
