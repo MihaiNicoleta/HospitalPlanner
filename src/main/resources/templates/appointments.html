@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Appointments</title>
+    <style>
+           body {
+            background-image: url('https://live.staticflickr.com/65535/52939897827_f16c54ba56_z.jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: black;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+<h1>Your next appointments, <span th:text="${appointments[0].doctor.name}"></span></h1>
+<table>
+    <tr>
+        <th>Patient</th>
+        <th>Date</th>
+        <th>Time</th>
+    </tr>
+    <!-- Utilizați th:each pentru a parcurge lista de programări -->
+    <tr th:each="appointment : ${appointments}">
+        <td th:text="${appointment.getPatient.getFirstName()}"></td>
+        <td th:text="${#dates.format(appointment.getDate(), 'yyyy-MM-dd')}"></td>
+        <td th:text="${appointment.getStartTime()} + ' - ' + ${appointment.getEndTime()}"></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import jakarta.persistence.GeneratedValue;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @Builder
 @RequiredArgsConstructor
