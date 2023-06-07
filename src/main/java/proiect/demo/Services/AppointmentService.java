@@ -36,6 +36,10 @@ public class AppointmentService {
         return appointmentRepository.findAll();
     }
 
+    public List<Appointment> findByDoctorId(Integer doctorId) {
+        return appointmentRepository.findByDoctorId(doctorId);
+    }
+
     private AvailableSlotRepository availableSlotsRepository;
 
     @Autowired

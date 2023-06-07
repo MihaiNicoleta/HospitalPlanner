@@ -3,7 +3,9 @@ package proiect.demo.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import proiect.demo.Domain.Doctor;
+import proiect.demo.Domain.User;
 import proiect.demo.Repostiories.DoctorRepository;
+import proiect.demo.Repostiories.UserRepository;
 import proiect.demo.configs.ResourceNotFoundException;
 
 import java.util.List;
@@ -13,6 +15,9 @@ public class DoctorService {
 
     @Autowired
     private DoctorRepository doctorRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public Doctor getDoctorById(int id) {
         return doctorRepository.findById(id)
@@ -31,4 +36,5 @@ public class DoctorService {
     public List<Doctor> getDoctorsByDepartment(Integer departmentId) {
         return doctorRepository.findByDepartmentId(departmentId);
     }
+
 }
