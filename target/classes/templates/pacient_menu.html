@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Clinic</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <style>
     body {
       background-image: url('https://hips.hearstapps.com/hmg-prod/images/types-of-doctors-1600114658.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:*');
@@ -374,6 +373,48 @@ header {
 .button-find-doctor:hover span {
   transform: translateX(-200%);
 }
+.symptoms {
+  background-color: #f5f5f5;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.symptoms h3 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.symptoms form {
+  margin-bottom: 10px;
+}
+
+.symptoms label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.symptoms select {
+  width: 100%;
+  padding: 5px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.symptoms input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#notification {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #ddd;
+}
 
 .button-check-symptoms:hover span {
   transform: translateX(200%);
@@ -396,9 +437,22 @@ header {
   font-weight: bold;
   font-size: 20px;
 }
+<script>
+    function validateForm() {
+        var selectedSymptom = document.getElementById("symptom").value;
+        if (selectedSymptom === "cough") {
+            alert("Mergi la doctor");
+            return false; // Prevent form submission
+        }
+        return true; // Allow form submission
+    }
+</script>
+
+
     </style>
 </head>
-<body><header>
+<body>
+<header>
     <div class="logo">
         <img src="https://live.staticflickr.com/65535/52938325014_23e12349b1.jpg" alt="NYC Health + Hospitals">
     </div>
@@ -413,14 +467,14 @@ header {
 </header>
 
 <div class="welcome">
-<h2>now YOU CAN:</h2>
-<div class="buttons">
-    <button class="button-find-doctor"><a href="pacient_menu/find_doctor">FIND A DOCTOR</a></button>
-    <button class="button-make-appointment"><a href="pacient_menu/appointment">MAKE AN APPOINTMENT</a></button>
-    <button class="button-check-symptoms"><a href="#symptoms">CHECK SYMPTOMS</a></button>
-    <button class="button-services"><a href="#services">SEE OTHER SERVICES</a> </button>
+    <h2>now YOU CAN:</h2>
+    <div class="buttons">
+        <button class="button-find-doctor"><a href="pacient_menu/find_doctor">FIND A DOCTOR</a></button>
+        <button class="button-make-appointment"><a href="pacient_menu/appointment">MAKE AN APPOINTMENT</a></button>
+        <button class="button-services"><a href="#services">SEE OTHER SERVICES</a></button>
+        <button class="button-check-symptoms"><a href="#symptoms">CHECK SYMPTOMS</a></button>
 
-</div>
+    </div>
 </div>
 
 <section class="box" id="about">
@@ -467,48 +521,50 @@ header {
 
 <section class="symptoms" id="symptoms">
     <h3>Symptoms Checker</h3>
-    <form action="#" method="GET">
+    <form action="#" method="GET" onsubmit="return validateForm()">
         <label for="symptom">Select a symptom:</label>
         <select name="symptom" id="symptom">
             <option value="">Select a symptom</option>
-            <option value="cough">Cough</option>
-            <option value="fever">Fever</option>
-            <option value="headache">Headache</option>
-            <option value="nausea">Nausea</option>
-            <option value="rash">Rash</option>
-            <option value="sore throat">Sore throat</option>
+            <option value="acne">acne</option>
+            <option value="chest pain">chest pain</option>
+            <option value="stomach pain">stomach pain</option>
+            <option value="extreme fatigue">extreme fatigue</option>
         </select>
-        <input type="submit" value="Find a Doctor">
+        <input type="submit" value="Check symptom">
     </form>
+    <div id="notification"></div>
 </section>
 
 <section class="contacts" id="contacts">
     <h3>Contact Us</h3>
-    <form action="#" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Enter your name..." required>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email..." required>
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" placeholder="Enter your message..." required></textarea>
-        <input type="submit" value="Submit"/>
-    </form>
+    <div>
+        <p><strong>Phone:</strong> +1 123-456-7890</p>
+        <p><strong>Address:</strong> Iasi nr 25</p>
+        <p><strong>Email:</strong> proiectip2023@gmail.com </p>
+        <p><strong>Email:</strong> proiectip2023@gmail.com </p>
+    </div>
 </section>
-
-
-<script src="https://kit.fontawesome.com/3f79b074a1.js" crossorigin="anonymous"></script>
 <script>
-  const menuIcon = document.querySelector(".menu-icon");
-  const mainNav = document.querySelector(".main-nav");
-
-  menuIcon.addEventListener("click", () => {
-	mainNav.classList.toggle("active");
-	menuIcon.childNodes[0].classList.toggle("fa-bars");
-	menuIcon.childNodes[0].classList.toggle("fa-times");
-  });
-
-
-
-
+    function validateForm() {
+        var selectedSymptom = document.getElementById("symptom").value;
+        if (selectedSymptom === "chest pain") {
+            alert("You should make a cardiology appointment");
+            return false;
+        }
+          if (selectedSymptom === "acne") {
+            alert("You should make a dermatology appointment");
+            return false;
+        }
+        if (selectedSymptom === "stomach pain") {
+            alert("You should make a gastroenterology appointment");
+            return false;
+        }
+         if (selectedSymptom === "extreme fatigue") {
+            alert("You should make an endocrinology appointment");
+            return false;
+        }
+        return true;
+    }
 
 </script>
+</body>

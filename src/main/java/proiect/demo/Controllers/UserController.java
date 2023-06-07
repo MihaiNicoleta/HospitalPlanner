@@ -32,6 +32,7 @@ public class UserController {
     private final DoctorService doctorService;
     private final ApplicationConfig applicationConfig;
     private final AppointmentService appointmentService;
+    private final EmailService emailService;
 
     @GetMapping("/login2")
     public String showLoginForm() {
@@ -62,6 +63,15 @@ public class UserController {
     public String free_appointments() {
         return "free_appointments";
     }
+/*
+    @PostMapping(value = "/email")
+    public void sendEmail(@RequestParam("pacientId") int pacientId) {
+        // imi trb user id sa i iau mailul sa trimit la acel mail
+        User user = userService.getPatientById(pacientId);
+        String mail = user.getEmail();
+        String message = "Buna ziua " + user.getFirstName() + " !" + "\n" +
+                "Multumim ca ai apelat la noi!" + "\n" + "Acestea sunt detaliile programarii tale ";
+    }*/
 
     @PostMapping(value = "/login2")
     public String login(@ModelAttribute AuthenticationRequest request, Model model, HttpSession session) {
@@ -102,25 +112,29 @@ public class UserController {
 
     @PostMapping("/pacient_menu/appointment")
     public String saveAppointment(@ModelAttribute @Valid Appointment appointment, BindingResult result, RedirectAttributes redirectAttributes, HttpSession session) {
-        System.out.println("AICI 1");
         Integer patientId = (Integer) session.getAttribute("userId");
-
-        // Verificați dacă pacientul este autentificat
+        // vad daca pacientul e logat
         if (patientId == null) {
             redirectAttributes.addFlashAttribute("errorMessage", "Nu sunteți autentificat!");
             return "redirect:/users/login2";
         }
-
-        // Setați ID-ul pacientului în obiectul appointment
         appointment.setPatient(userService.getPatientById(patientId));
         if (result.hasErrors()) {
             System.out.println("Erori de validare: " + result.getAllErrors());
             return "appointment";
         }
         try {
-            System.out.println("AIci 2");
             appointmentService.save(appointment, session);
             redirectAttributes.addFlashAttribute("successMessage", "Programarea a fost salvată cu succes!");
+            User user = userService.getPatientById(patientId);
+            String mail = user.getEmail();
+            String message = "Buna ziua " + user.getFirstName() + " !" + "\n" +
+                    "Multumim ca ai apelat la noi!" + "\n" + "Acestea sunt detaliile programarii tale "
+
+                    + "\n" + "Doctor: " + appointment.getDoctor().getName() + "\n" +
+                    "Data: " + appointment.getDate() + "\n" + "Ora incepere: " + appointment.getStartTime()
+                    + "\n" + appointment.getEndTime() + "\n" + "Cabinet: " + appointment.getDoctor().getCabinetNumber();
+            emailService.sendEmail(mail, "Detalii programare medic", message);
             return "redirect:/users/pacient_menu/appointment";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "A apărut o eroare la salvarea programării: " + e.getMessage());
