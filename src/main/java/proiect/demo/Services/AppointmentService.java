@@ -47,42 +47,42 @@ public class AppointmentService {
     @Autowired
     private UserRepository userRepository;
 
-    public Doctor getDoctorById(int doctorId) {
-        return doctorRepository.findById(doctorId)
-                .orElseThrow(() -> new ResourceNotFoundException("Doctor with id=" + doctorId + " not found"));
-    }
-
-    public User getUserById(int pacientId) {
-        return userRepository.findById(pacientId)
-                .orElseThrow(() -> new ResourceNotFoundException("Pacient with id=" + pacientId + " not found"));
-    }
-
+    /**
+     * Verifică disponibilitatea unui interval de timp pentru un anumit doctor într-o anumită dată.
+     *
+     * @param doctorId       Id-ul doctorului.
+     * @param startDateTime  Ora de început a intervalului de timp.
+     * @param endDateTime    Ora de sfârșit a intervalului de timp.
+     * @param date           Data.
+     * @param session        Sesiunea curentă.
+     * @throws RuntimeException        Dacă intervalul de timp se suprapune cu o altă programare existentă.
+     * @throws ResourceNotFoundException Dacă nu există un doctor cu id-ul specificat.
+     */
     public void checkSlotAvailability(int doctorId, LocalTime startDateTime, LocalTime endDateTime, Date date, HttpSession session) {
-        // Convertește Timestamp la LocalDateTime
         LocalTime startDateTimeLocal = startDateTime;
         LocalTime endDateTimeLocal = endDateTime;
-        System.out.println("AICI 6");
-        // Verifică suprapunerile pentru programările dintr-o anumită dată
         List<Appointment> overlappingAppointments = appointmentRepository.findByDoctorIdAndDate(doctorId, date);
         for (Appointment appointment : overlappingAppointments) {
             LocalTime appointmentStart = appointment.getStartTime();
             LocalTime appointmentEnd = appointment.getEndTime();
 
-            // Verifică suprapunerea intervalului orar
             if (startDateTimeLocal.isBefore(appointmentEnd) && endDateTimeLocal.isAfter(appointmentStart)) {
-                session.setAttribute("eroare",true);
-                System.out.println("AICI 7");
+                session.setAttribute("eroare", true);
                 throw new RuntimeException("Intervalul dvs. se suprapune cu o altă programare existentă.");
             }
         }
     }
+    /**
+     * Obțineți programările disponibile pentru un anumit departament.
+     *
+     * @param departmentId Id-ul departamentului.
+     * @return Lista de programări disponibile.
+     */
     public List<Appointment> getFreeAppointments(int departmentId) {
         // Obțineți departamentul pe baza id-ului
         Optional<Department> department = departmentRepository.findById(departmentId);
-        System.out.println("DA 1 "+ department);
-        // Obțineți lista de doctori din departament
+
         List<Doctor> doctors = doctorRepository.findByDepartmentId(departmentId);
-        System.out.println("DA 2" + doctors);
         List<Appointment> freeAppointments = new ArrayList<>();
 
         for (Doctor doctor : doctors) {
@@ -91,7 +91,6 @@ public class AppointmentService {
 
             // intervalele libere
             List<TimeSlot> freeTimeSlots = getFreeTimeSlots(existingAppointments);
-            System.out.println("DA 3" + freeTimeSlots);
             // pt fiecare programare libera facem un appoiment
             for (TimeSlot timeSlot : freeTimeSlots) {
                 Appointment appointment = new Appointment();
@@ -107,20 +106,25 @@ public class AppointmentService {
 
         return freeAppointments;
     }
-
+    /**
+     * Obțineți intervalele orare libere pentru programările existente.
+     *
+     * @param existingAppointments Lista de programări existente.
+     * @return Lista de intervale orare libere.
+     */
     private List<TimeSlot> getFreeTimeSlots(List<Appointment> existingAppointments) {
         List<TimeSlot> freeTimeSlots = new ArrayList<>();
         LocalTime startTime = LocalTime.of(8, 0); // Ora de început (8:00 AM)
         LocalTime endTime = LocalTime.of(15, 0); // Ora de sfârșit (3:00 PM)
 
-        // Generați toate intervalele orare între ora de început și ora de sfârșit
+        //toate intervalele orare intre ora de inceput si ora de sfarsit
         while (startTime.isBefore(endTime)) {
-            LocalTime nextTime = startTime.plusMinutes(120); // Durata programării este de 30 de minute
+            LocalTime nextTime = startTime.plusMinutes(120);
             TimeSlot timeSlot = new TimeSlot(startTime, nextTime);
 
             boolean isFree = true;
 
-            // Verificați dacă intervalul orar este deja ocupat
+            //  intervalul orar este deja ocupat?
             for (Appointment appointment : existingAppointments) {
                 if (isOverlapping(appointment.getStartTime(), appointment.getEndTime(), startTime, nextTime)) {
                     isFree = false;
@@ -138,26 +142,46 @@ public class AppointmentService {
         return freeTimeSlots;
     }
 
+    /**
+     * Verifică dacă două intervale orare se suprapun.
+     *
+     * @param start1 Ora de început a primului interval orar.
+     * @param end1   Ora de sfârșit a primului interval orar.
+     * @param start2 Ora de început a celui de-al doilea interval orar.
+     * @param end2   Ora de sfârșit a celui de-al doilea interval orar.
+     * @return `true` dacă intervalele se suprapun, `false` în caz contrar.
+     */
     private boolean isOverlapping(LocalTime start1, LocalTime end1, LocalTime start2, LocalTime end2) {
         return start1.isBefore(end2) && end1.isAfter(start2);
     }
 
 
+    /**
+     * Salvează o programare și verifică disponibilitatea intervalului de timp.
+     *
+     * @param appointment Programarea care trebuie salvată.
+     * @param session     Sesiunea curentă.
+     * @throws RuntimeException        Dacă intervalul de timp se suprapune cu o altă programare existentă.
+     * @throws ResourceNotFoundException Dacă nu există programarea pentru doctorul specificat.
+     */
     @Transactional
     public void save(Appointment appointment, HttpSession session) {
         int doctorId = appointment.getDoctor().getId();
         LocalTime startDateTime = appointment.getStartTime();
         LocalTime endDateTime = appointment.getEndTime();
         Date date = appointment.getDate();
-        System.out.println("AICI 3");
-        checkSlotAvailability(doctorId, startDateTime, endDateTime, date,session);
-        System.out.println("AICI 4");
+        checkSlotAvailability(doctorId, startDateTime, endDateTime, date, session);
         appointment.setStatus("confirmed");
         appointmentRepository.save(appointment);
-        System.out.println("AICI 5");
     }
 
-
+    /**
+     * Obțineți o programare după id.
+     *
+     * @param id Id-ul programării.
+     * @return Programarea cu id-ul specificat.
+     * @throws ResourceNotFoundException Dacă nu există programarea cu id-ul specificat.
+     */
     public Appointment getAppointmentById(int id) {
         return appointmentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Appointment with id=" + id + " not found"));

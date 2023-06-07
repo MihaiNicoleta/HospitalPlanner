@@ -30,7 +30,10 @@ public class UserService {
     private final AuthenticationManager authenticationManager;
 
     /**
-     * @return the generated token if the credentials are ok
+     * Autentifică utilizatorul și returnează un token de autentificare.
+     *
+     * @param request Cererea de autentificare care conține email-ul și parola utilizatorului.
+     * @return Răspunsul care conține token-ul de autentificare.
      */
     public AuthenticationResponse login(AuthenticationRequest request) {
 
@@ -40,11 +43,8 @@ public class UserService {
         );
         System.out.println(request.getEmail() + " " +
                 request.getPassword());
-      //  authenticationManager.authenticate(upaToken);
 
         var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
-
-        // User user = userOptional.orElseThrow(() -> new RuntimeException("User not found"));
 
         var jwtToken = jwtService.generateToken(user);
 
@@ -73,8 +73,12 @@ public class UserService {
                 .build();
     }
 
+
     /**
-     * saves the user in the database
+     * Înregistrează un nou utilizator și returnează un token de autentificare.
+     *
+     * @param request Cererea de înregistrare care conține informațiile utilizatorului.
+     * @return Răspunsul care conține token-ul de autentificare.
      */
     public RegisterResponse register(RegisterRequest request) {
 
@@ -103,11 +107,21 @@ public class UserService {
                 .token(jwtToken)
                 .build();
     }
-
+    /**
+     * Returnează o listă cu toți pacienții.
+     *
+     * @return Lista cu toți pacienții.
+     */
     public List<User> getAllPatients() {
         return userRepository.findAll();
     }
-
+    /**
+     * Returnează un pacient după ID.
+     *
+     * @param id ID-ul pacientului.
+     * @return Pacientul găsit.
+     * @throws ResourceNotFoundException dacă pacientul nu există.
+     */
     public User getPatientById(int id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Doctor with id=" + id + " not found"));
