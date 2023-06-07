@@ -19,6 +19,10 @@ public class DoctorService {
                 .orElseThrow(() -> new ResourceNotFoundException("Doctor with id=" + id + " not found"));
     }
 
+    public Doctor getDoctorByEmail(String email) {
+        return doctorRepository.findByEmail(email);
+    }
+
     public List<Doctor> getAllDoctors() {
         return doctorRepository.findAll();
     }

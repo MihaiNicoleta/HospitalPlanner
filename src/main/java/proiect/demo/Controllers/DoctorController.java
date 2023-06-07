@@ -23,6 +23,23 @@ public class DoctorController {
     @Autowired
     private DepartmentService departmentService;
 
+    @GetMapping("/login")
+    public String doctor_login() {
+        return "doctor_login";
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
+        Doctor doctor = doctorService.getDoctorByEmail(email);
+        if (doctor == null || !doctor.getPassword().equals(password)) {
+            model.addAttribute("error", true);
+            return "doctor_login";
+        } else {
+            return "redirect:/doctors/doctor_menu";
+        }
+    }
+
+
     @GetMapping("/{id}")
     public ResponseEntity<Doctor> getDoctorById(@PathVariable int id) {
         Doctor doctor = doctorService.getDoctorById(id);
@@ -56,6 +73,7 @@ public class DoctorController {
 
         return "doctors_op";
     }
+
     @GetMapping("/afisareDoctori")
     public String showDoctors(Model model) {
         List<Doctor> doctors = doctorService.getAllDoctors();
